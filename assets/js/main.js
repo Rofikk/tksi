@@ -51,10 +51,23 @@ const search=document.querySelector('#term-search');
 if(search){
   const glossary=document.querySelector('#glossary');
   const items=[...document.querySelectorAll('#glossary article')].sort((a,b)=>a.querySelector('h2').textContent.localeCompare(b.querySelector('h2').textContent,'id',{sensitivity:'base'}));
-  items.forEach(item=>glossary.appendChild(item));
+  const groups=new Map();
+  items.forEach(item=>{
+    const heading=item.querySelector('h2');
+    const letter=heading.textContent.trim().charAt(0).toLocaleUpperCase('id');
+    heading.outerHTML=`<h3>${heading.innerHTML}</h3>`;
+    if(!groups.has(letter)){
+      const section=document.createElement('section');section.className='glossary-group';section.id=`glossary-${letter}`;section.dataset.letter=letter;section.innerHTML=`<h2 class="glossary-group-title">${letter}</h2><div class="glossary-group-grid"></div>`;groups.set(letter,section);glossary.appendChild(section);
+    }
+    groups.get(letter).querySelector('.glossary-group-grid').appendChild(item);
+  });
+  const alphabet=document.createElement('nav');alphabet.className='alphabet-nav';alphabet.setAttribute('aria-label','Navigasi alfabet glosarium');
+  alphabet.innerHTML='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(letter=>groups.has(letter)?`<a href="#glossary-${letter}" aria-label="Istilah huruf ${letter}">${letter}</a>`:`<span aria-hidden="true">${letter}</span>`).join('');
+  glossary.before(alphabet);
   const empty=document.querySelector('#empty');
   search.setAttribute('aria-controls','glossary');
-  search.addEventListener('input',()=>{const q=search.value.toLocaleLowerCase('id').trim();let shown=0;items.forEach(item=>{const match=!q||item.dataset.term.includes(q)||item.textContent.toLocaleLowerCase('id').includes(q);item.hidden=!match;if(match)shown++});empty.hidden=shown!==0;empty.setAttribute('aria-live','polite')});
+  search.addEventListener('input',()=>{const q=search.value.toLocaleLowerCase('id').trim();let shown=0;items.forEach(item=>{const match=!q||item.dataset.term.includes(q)||item.textContent.toLocaleLowerCase('id').includes(q);item.hidden=!match;if(match)shown++});groups.forEach(group=>group.hidden=![...group.querySelectorAll('article')].some(item=>!item.hidden));empty.hidden=shown!==0;empty.setAttribute('aria-live','polite')});
+  if('IntersectionObserver' in window){const groupObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting)alphabet.querySelectorAll('a').forEach(link=>link.classList.toggle('current',link.getAttribute('href')===`#${entry.target.id}`))})},{rootMargin:'-25% 0px -65% 0px'});groups.forEach(group=>groupObserver.observe(group))}
 }
 const toc=document.querySelector('.toc');
 if(toc){
