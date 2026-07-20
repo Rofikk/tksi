@@ -46,7 +46,14 @@ if(toggle&&links){
 }
 document.querySelectorAll('[data-year]').forEach(el=>el.textContent=new Date().getFullYear());
 const search=document.querySelector('#term-search');
-if(search){const items=[...document.querySelectorAll('#glossary article')];const empty=document.querySelector('#empty');search.addEventListener('input',()=>{const q=search.value.toLocaleLowerCase('id').trim();let shown=0;items.forEach(item=>{const match=!q||item.dataset.term.includes(q)||item.textContent.toLocaleLowerCase('id').includes(q);item.hidden=!match;if(match)shown++});empty.hidden=shown!==0})}
+if(search){
+  const glossary=document.querySelector('#glossary');
+  const items=[...document.querySelectorAll('#glossary article')].sort((a,b)=>a.querySelector('h2').textContent.localeCompare(b.querySelector('h2').textContent,'id',{sensitivity:'base'}));
+  items.forEach(item=>glossary.appendChild(item));
+  const empty=document.querySelector('#empty');
+  search.setAttribute('aria-controls','glossary');
+  search.addEventListener('input',()=>{const q=search.value.toLocaleLowerCase('id').trim();let shown=0;items.forEach(item=>{const match=!q||item.dataset.term.includes(q)||item.textContent.toLocaleLowerCase('id').includes(q);item.hidden=!match;if(match)shown++});empty.hidden=shown!==0;empty.setAttribute('aria-live','polite')});
+}
 const toc=document.querySelector('.toc');
 if(toc){
   const tocToggle=document.createElement('button');
