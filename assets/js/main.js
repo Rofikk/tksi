@@ -60,14 +60,23 @@ if(toc){
   tocToggle.className='toc-toggle';
   tocToggle.type='button';
   tocToggle.setAttribute('aria-expanded','false');
-  tocToggle.textContent='Daftar isi artikel';
-  toc.prepend(tocToggle);
-  tocToggle.addEventListener('click',()=>{const open=!toc.classList.contains('open');toc.classList.toggle('open',open);tocToggle.setAttribute('aria-expanded',String(open))});
-  toc.addEventListener('click',event=>{if(event.target.closest('a')&&innerWidth<=850){toc.classList.remove('open');tocToggle.setAttribute('aria-expanded','false')}});
+  tocToggle.setAttribute('aria-controls','article-toc');
+  tocToggle.innerHTML='<span>Daftar isi</span><small>Bagian artikel</small>';
+  toc.id='article-toc';
+  document.body.appendChild(tocToggle);
+  const tocClose=document.createElement('button');tocClose.className='toc-close';tocClose.type='button';tocClose.setAttribute('aria-label','Tutup daftar isi');tocClose.textContent='×';toc.prepend(tocClose);
+  const tocBackdrop=document.createElement('div');tocBackdrop.className='toc-backdrop';document.body.appendChild(tocBackdrop);
+  const setToc=open=>{toc.classList.toggle('open',open);tocBackdrop.classList.toggle('open',open);tocToggle.setAttribute('aria-expanded',String(open));document.body.classList.toggle('toc-open',open);if(open)tocClose.focus()};
+  tocToggle.addEventListener('click',()=>setToc(true));
+  tocClose.addEventListener('click',()=>{setToc(false);tocToggle.focus()});
+  tocBackdrop.addEventListener('click',()=>setToc(false));
+  toc.addEventListener('click',event=>{if(event.target.closest('a')&&innerWidth<=850)setToc(false)});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&toc.classList.contains('open')){setToc(false);tocToggle.focus()}});
+  matchMedia('(min-width: 851px)').addEventListener('change',event=>{if(event.matches)setToc(false)});
   const anchors=[...toc.querySelectorAll('a[href^="#"]')];
   const sections=anchors.map(anchor=>document.querySelector(anchor.getAttribute('href'))).filter(Boolean);
   if(sections.length&&'IntersectionObserver' in window){
-    const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){anchors.forEach(a=>a.classList.toggle('current',a.getAttribute('href')===`#${entry.target.id}`))}})},{rootMargin:'-25% 0px -65% 0px'});
+    const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){anchors.forEach(a=>a.classList.toggle('current',a.getAttribute('href')===`#${entry.target.id}`));const label=anchors.find(a=>a.getAttribute('href')===`#${entry.target.id}`)?.textContent?.trim();if(label)tocToggle.querySelector('small').textContent=label}})},{rootMargin:'-25% 0px -65% 0px'});
     sections.forEach(section=>observer.observe(section));
   }
   const progress=document.createElement('div');progress.className='reading-progress';progress.setAttribute('aria-hidden','true');document.body.appendChild(progress);
