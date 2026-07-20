@@ -123,3 +123,26 @@ const topButton=document.createElement('button');
 topButton.className='back-to-top';topButton.type='button';topButton.setAttribute('aria-label','Kembali ke atas');topButton.textContent='↑';document.body.appendChild(topButton);
 addEventListener('scroll',()=>topButton.classList.toggle('visible',scrollY>650),{passive:true});
 topButton.addEventListener('click',()=>scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));
+const jutpiCards=[...document.querySelectorAll('.jutpi-card[data-part]')];
+if(jutpiCards.length){
+  const storageKey='tksi-jutpi-progress-v1';
+  const readProgress=()=>{try{return new Set(JSON.parse(localStorage.getItem(storageKey)||'[]'))}catch{return new Set()}};
+  let completed=readProgress();
+  const label=document.querySelector('#jutpi-progress-label');
+  const bar=document.querySelector('#jutpi-progress-bar');
+  const track=document.querySelector('.progress-track');
+  const render=()=>{
+    jutpiCards.forEach(card=>{const done=completed.has(card.dataset.part);card.classList.toggle('completed',done);const state=card.querySelector('.read-state');if(state)state.textContent=done?'Sudah dibaca':'Belum dibaca'});
+    const count=completed.size;
+    if(label)label.textContent=`${count} dari ${jutpiCards.length} bagian dibaca`;
+    if(bar)bar.style.width=`${count/jutpiCards.length*100}%`;
+    if(track)track.setAttribute('aria-valuenow',String(count));
+  };
+  jutpiCards.forEach(card=>card.querySelector('.jutpi-card-link')?.addEventListener('click',()=>{completed.add(card.dataset.part);try{localStorage.setItem(storageKey,JSON.stringify([...completed]))}catch{}render()}));
+  document.querySelector('#reset-jutpi-progress')?.addEventListener('click',()=>{completed.clear();try{localStorage.removeItem(storageKey)}catch{}render()});
+  const stages=[...document.querySelectorAll('.learning-stage')];
+  document.querySelectorAll('.jutpi-quick-nav a[href^="#jutpi-"]').forEach(link=>link.addEventListener('click',()=>{const target=document.querySelector(link.getAttribute('href'));const stage=target?.closest('.learning-stage');if(stage)stage.open=true}));
+  const stageMedia=matchMedia('(max-width: 850px)');
+  const setStageMode=()=>{if(stageMedia.matches)stages.forEach((stage,index)=>stage.open=index===0);else stages.forEach(stage=>stage.open=true)};
+  stageMedia.addEventListener('change',setStageMode);setStageMode();render();
+}
