@@ -56,6 +56,8 @@ if(search){
 }
 const toc=document.querySelector('.toc');
 if(toc){
+  const tocHome=toc.parentNode;
+  const tocNext=toc.nextSibling;
   const tocToggle=document.createElement('button');
   tocToggle.className='toc-toggle';
   tocToggle.type='button';
@@ -72,7 +74,9 @@ if(toc){
   tocBackdrop.addEventListener('click',()=>setToc(false));
   toc.addEventListener('click',event=>{if(event.target.closest('a')&&innerWidth<=850)setToc(false)});
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&toc.classList.contains('open')){setToc(false);tocToggle.focus()}});
-  matchMedia('(min-width: 851px)').addEventListener('change',event=>{if(event.matches)setToc(false)});
+  const tocMedia=matchMedia('(max-width: 850px)');
+  const placeToc=()=>{setToc(false);if(tocMedia.matches){if(toc.parentNode!==document.body)document.body.appendChild(toc)}else if(toc.parentNode!==tocHome){tocHome.insertBefore(toc,tocNext)}};
+  tocMedia.addEventListener('change',placeToc);placeToc();
   const anchors=[...toc.querySelectorAll('a[href^="#"]')];
   const sections=anchors.map(anchor=>document.querySelector(anchor.getAttribute('href'))).filter(Boolean);
   if(sections.length&&'IntersectionObserver' in window){
