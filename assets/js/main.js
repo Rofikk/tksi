@@ -63,11 +63,28 @@ if(search){
   });
   const alphabet=document.createElement('nav');alphabet.className='alphabet-nav';alphabet.setAttribute('aria-label','Navigasi alfabet glosarium');
   alphabet.innerHTML='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(letter=>groups.has(letter)?`<a href="#glossary-${letter}" aria-label="Istilah huruf ${letter}">${letter}</a>`:`<span aria-hidden="true">${letter}</span>`).join('');
-  glossary.before(alphabet);
+  const alphabetWrap=document.createElement('div');alphabetWrap.className='alphabet-nav-wrap';alphabetWrap.appendChild(alphabet);glossary.before(alphabetWrap);
   const empty=document.querySelector('#empty');
   search.setAttribute('aria-controls','glossary');
   search.addEventListener('input',()=>{const q=search.value.toLocaleLowerCase('id').trim();let shown=0;items.forEach(item=>{const match=!q||item.dataset.term.includes(q)||item.textContent.toLocaleLowerCase('id').includes(q);item.hidden=!match;if(match)shown++});groups.forEach(group=>group.hidden=![...group.querySelectorAll('article')].some(item=>!item.hidden));empty.hidden=shown!==0;empty.setAttribute('aria-live','polite')});
-  if('IntersectionObserver' in window){const groupObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting)alphabet.querySelectorAll('a').forEach(link=>link.classList.toggle('current',link.getAttribute('href')===`#${entry.target.id}`))})},{rootMargin:'-25% 0px -65% 0px'});groups.forEach(group=>groupObserver.observe(group))}
+  if('IntersectionObserver' in window){
+    const groupObserver=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting)return;
+        let activeLink;
+        alphabet.querySelectorAll('a').forEach(link=>{
+          const active=link.getAttribute('href')===`#${entry.target.id}`;
+          link.classList.toggle('current',active);
+          if(active)activeLink=link;
+        });
+        if(activeLink&&innerWidth<=850){
+          const left=activeLink.offsetLeft-(alphabet.clientWidth-activeLink.offsetWidth)/2;
+          alphabet.scrollTo({left:Math.max(0,left),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+        }
+      });
+    },{rootMargin:'-25% 0px -65% 0px'});
+    groups.forEach(group=>groupObserver.observe(group));
+  }
 }
 const toc=document.querySelector('.toc');
 if(toc){
