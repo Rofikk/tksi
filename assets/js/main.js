@@ -8,6 +8,8 @@ if(main&&!document.querySelector('.skip-link')){
 }
 const nav=document.querySelector('.site-header nav');
 if(nav&&!nav.hasAttribute('aria-label'))nav.setAttribute('aria-label','Navigasi utama');
+const definitions=document.querySelector('#definitions');
+if(definitions&&!definitions.querySelector(':scope > .eyebrow'))definitions.insertAdjacentHTML('afterbegin','<p class="eyebrow">Bagian 2</p>');
 const navigation=[
   ['index.html','Beranda'],
   ['panduan.html','Panduan'],
@@ -21,7 +23,7 @@ if(links){
   links.innerHTML=navigation.map(([path,label])=>{
     const target=base+path;
     const active=(current==='transportasi.html'&&path.includes('transportasi'))||current===path;
-    return `<a${active?' class="active"':''} href="${target}">${label}</a>`;
+    return `<a${active?' class="active" aria-current="page"':''} href="${target}">${label}</a>`;
   }).join('');
 }
 const toggle=document.querySelector('.nav-toggle');
@@ -80,7 +82,7 @@ if(toc){
   const anchors=[...toc.querySelectorAll('a[href^="#"]')];
   const sections=anchors.map(anchor=>document.querySelector(anchor.getAttribute('href'))).filter(Boolean);
   if(sections.length&&'IntersectionObserver' in window){
-    const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){anchors.forEach(a=>a.classList.toggle('current',a.getAttribute('href')===`#${entry.target.id}`));const label=anchors.find(a=>a.getAttribute('href')===`#${entry.target.id}`)?.textContent?.trim();if(label)tocToggle.querySelector('small').textContent=label}})},{rootMargin:'-25% 0px -65% 0px'});
+    const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){anchors.forEach(a=>{const active=a.getAttribute('href')===`#${entry.target.id}`;a.classList.toggle('current',active);if(active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')});const label=anchors.find(a=>a.getAttribute('href')===`#${entry.target.id}`)?.textContent?.trim();if(label)tocToggle.querySelector('small').textContent=label}})},{rootMargin:'-25% 0px -65% 0px'});
     sections.forEach(section=>observer.observe(section));
   }
   const progress=document.createElement('div');progress.className='reading-progress';progress.setAttribute('aria-hidden','true');document.body.appendChild(progress);
