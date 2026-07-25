@@ -154,9 +154,16 @@ if(preferenceBox){
   const result=preferenceBox.querySelector('#personalizer-result');
   const resultTitle=preferenceBox.querySelector('#recommendation-title');
   const resultCopy=preferenceBox.querySelector('#recommendation-copy');
+  const resultRole=preferenceBox.querySelector('#recommendation-role');
   const resultLink=preferenceBox.querySelector('#recommendation-link');
   let choice={audience:'',intent:''};
-  const audienceNames={practitioner:'praktisi transportasi',student:'mahasiswa atau pembelajar',public:'pembaca umum',researcher:'peneliti atau penyusun laporan'};
+  const audienceNames={practitioner:'praktisi layanan transportasi',student:'mahasiswa atau pembelajar',public:'pelanggan atau anggota masyarakat',researcher:'peneliti atau penyusun laporan'};
+  const audienceRoles={
+    public:'Keterlibatan Anda: pahami hak dan kewajiban pelanggan, jaga keselamatan, gunakan fasilitas secara bertanggung jawab, dan sampaikan masukan berdasarkan fakta.',
+    practitioner:'Keterlibatan Anda: hubungkan konsep dengan keputusan pelayanan, indikator kinerja, pengalaman pelanggan, dan perbaikan operasional.',
+    student:'Keterlibatan Anda: bangun fondasi konsep, uji pemahaman, lalu gunakan pengetahuan untuk membaca persoalan transportasi secara kritis.',
+    researcher:'Keterlibatan Anda: periksa definisi, data, asumsi, dan sumber agar analisis serta rekomendasi dapat ditelusuri.'
+  };
   const recommendations={
     foundation:{title:'Bangun fondasi melalui KO-001',copy:'Mulai dari cerita sehari-hari, lalu pahami transportasi, mobilitas, aksesibilitas, dan sistem.',href:'knowledge/transportasi.html#opening'},
     operations:{title:'Hubungkan konsep dengan kondisi operasional',copy:'Mulai dari pelayanan dan kinerja, kemudian lanjutkan ke konteks Transjakarta dan kerangka perbaikan.',href:'knowledge/transportasi.html#service-performance'},
@@ -179,6 +186,7 @@ if(preferenceBox){
     if(choice.audience==='practitioner'&&choice.intent==='operations')recommendation.copy='Mulai dari indikator pelayanan dan kinerja, lalu hubungkan dengan Transjakarta, Non-BRT, dan PERMATA.';
     resultTitle.textContent=recommendation.title;
     resultCopy.textContent=`Sebagai ${audienceNames[choice.audience]}, ${recommendation.copy.charAt(0).toLocaleLowerCase('id')+recommendation.copy.slice(1)}`;
+    resultRole.textContent=audienceRoles[choice.audience];
     resultLink.href=recommendation.href;
     save();
   };
