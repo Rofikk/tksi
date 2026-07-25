@@ -146,3 +146,75 @@ if(jutpiCards.length){
   const setStageMode=()=>{if(stageMedia.matches)stages.forEach((stage,index)=>stage.open=index===0);else stages.forEach(stage=>stage.open=true)};
   stageMedia.addEventListener('change',setStageMode);setStageMode();render();
 }
+const preferenceBox=document.querySelector('.reader-personalizer');
+if(preferenceBox){
+  const key='tksi-reader-preference-v1';
+  const audienceButtons=[...preferenceBox.querySelectorAll('[data-audience]')];
+  const intentButtons=[...preferenceBox.querySelectorAll('[data-intent]')];
+  const result=preferenceBox.querySelector('#personalizer-result');
+  const resultTitle=preferenceBox.querySelector('#recommendation-title');
+  const resultCopy=preferenceBox.querySelector('#recommendation-copy');
+  const resultLink=preferenceBox.querySelector('#recommendation-link');
+  let choice={audience:'',intent:''};
+  const audienceNames={practitioner:'praktisi transportasi',student:'mahasiswa atau pembelajar',public:'pembaca umum',researcher:'peneliti atau penyusun laporan'};
+  const recommendations={
+    foundation:{title:'Bangun fondasi melalui KO-001',copy:'Mulai dari cerita sehari-hari, lalu pahami transportasi, mobilitas, aksesibilitas, dan sistem.',href:'knowledge/transportasi.html#opening'},
+    operations:{title:'Hubungkan konsep dengan kondisi operasional',copy:'Mulai dari pelayanan dan kinerja, kemudian lanjutkan ke konteks Transjakarta dan kerangka perbaikan.',href:'knowledge/transportasi.html#service-performance'},
+    jutpi:{title:'Ikuti jalur belajar JUTPI',copy:'Pelajari fondasi, sistem perjalanan, Jabodetabek, dan penerapannya melalui lima tahap terarah.',href:'jutpi.html'},
+    term:{title:'Gunakan Glosarium TKSI',copy:'Cari istilah transportasi secara alfabetis tanpa harus membaca seluruh artikel terlebih dahulu.',href:'glosarium.html'},
+    source:{title:'Telusuri Referensi dan sitasi',copy:'Periksa 26 sumber, format APA 7, serta dasar ilmiah yang digunakan dalam KO-001.',href:'referensi.html'}
+  };
+  const setPressed=(buttons,value,dataKey)=>buttons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset[dataKey]===value)));
+  const save=()=>{try{localStorage.setItem(key,JSON.stringify(choice))}catch{}};
+  const renderPreference=()=>{
+    setPressed(audienceButtons,choice.audience,'audience');
+    setPressed(intentButtons,choice.intent,'intent');
+    const ready=choice.audience&&choice.intent;
+    result.hidden=!ready;
+    if(!ready)return;
+    const recommendation={...recommendations[choice.intent]};
+    if(choice.audience==='student'&&choice.intent==='foundation'){recommendation.copy='Mulai dari tujuan pembelajaran dan peta konsep, kemudian ikuti Bagian 1–19 secara berurutan.';recommendation.href='knowledge/transportasi.html#objectives'}
+    if(choice.audience==='public'&&choice.intent==='foundation')recommendation.copy='Mulai dari cerita pembuka dan contoh kehidupan sehari-hari sebelum masuk ke istilah teknis.';
+    if(choice.audience==='researcher'&&choice.intent==='foundation'){recommendation.copy='Mulai dari perbandingan definisi, definisi sintesis TKSI, dan sumber yang dapat ditelusuri.';recommendation.href='knowledge/transportasi.html#definitions'}
+    if(choice.audience==='practitioner'&&choice.intent==='operations')recommendation.copy='Mulai dari indikator pelayanan dan kinerja, lalu hubungkan dengan Transjakarta, Non-BRT, dan PERMATA.';
+    resultTitle.textContent=recommendation.title;
+    resultCopy.textContent=`Sebagai ${audienceNames[choice.audience]}, ${recommendation.copy.charAt(0).toLocaleLowerCase('id')+recommendation.copy.slice(1)}`;
+    resultLink.href=recommendation.href;
+    save();
+  };
+  [...audienceButtons,...intentButtons].forEach(button=>button.addEventListener('click',()=>{
+    if(button.dataset.audience)choice.audience=button.dataset.audience;
+    if(button.dataset.intent)choice.intent=button.dataset.intent;
+    renderPreference();
+  }));
+  preferenceBox.querySelector('#reset-preference')?.addEventListener('click',()=>{choice={audience:'',intent:''};try{localStorage.removeItem(key)}catch{}renderPreference();audienceButtons[0]?.focus()});
+  try{const saved=JSON.parse(localStorage.getItem(key)||'null');if(saved?.audience&&saved?.intent)choice=saved}catch{}
+  renderPreference();
+  const resume=preferenceBox.querySelector('#resume-reading');
+  try{
+    const last=JSON.parse(localStorage.getItem('tksi-last-reading-v1')||'null');
+    if(last?.href&&last?.label&&resume){resume.href=last.href;resume.querySelector('#resume-reading-label').textContent=last.label;resume.hidden=false}
+  }catch{}
+}
+const curiosityButton=document.querySelector('#random-curiosity');
+if(curiosityButton){
+  const questions=[...document.querySelectorAll('.curiosity-grid a')];
+  curiosityButton.addEventListener('click',()=>{
+    questions.forEach(question=>question.classList.remove('suggested'));
+    const selected=questions[Math.floor(Math.random()*questions.length)];
+    if(!selected)return;
+    selected.classList.add('suggested');
+    selected.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+    selected.focus({preventScroll:true});
+  });
+}
+const readingSections=[...document.querySelectorAll('article.prose section[id]')];
+if(readingSections.length&&'IntersectionObserver' in window){
+  const readingObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+    if(!entry.isIntersecting)return;
+    const heading=entry.target.querySelector('h2')?.textContent?.trim();
+    if(!heading)return;
+    try{localStorage.setItem('tksi-last-reading-v1',JSON.stringify({href:`knowledge/transportasi.html#${entry.target.id}`,label:heading}))}catch{}
+  }),{rootMargin:'-30% 0px -60% 0px'});
+  readingSections.forEach(section=>readingObserver.observe(section));
+}
