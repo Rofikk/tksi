@@ -12,17 +12,17 @@ const definitions=document.querySelector('#definitions');
 if(definitions&&!definitions.querySelector(':scope > .eyebrow'))definitions.insertAdjacentHTML('afterbegin','<p class="eyebrow">Bagian 2</p>');
 const navigation=[
   ['index.html','Beranda'],
-  ['panduan.html','Panduan'],
-  ['knowledge/transportasi.html','KO-001'],
-  ['jutpi.html','JUTPI'],
-  ['glosarium.html','Glosarium'],
-  ['referensi.html','Referensi']
+  ['panduan.html','Mulai Belajar'],
+  ['domain.html','Pengetahuan'],
+  ['kawan-bus/','Kawan Bus'],
+  ['tentang.html','Tentang']
 ];
 const links=document.querySelector('#nav-links');
 if(links){
   links.innerHTML=navigation.map(([path,label])=>{
     const target=base+path;
-    const active=(current==='transportasi.html'&&path.includes('transportasi'))||current===path;
+    const knowledgePages=['transportasi.html','jutpi.html','glosarium.html','referensi.html','domain.html'];
+    const active=(path==='domain.html'&&knowledgePages.includes(current))||current===path;
     return `<a${active?' class="active" aria-current="page"':''} href="${target}">${label}</a>`;
   }).join('');
 }
