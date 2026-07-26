@@ -1,6 +1,6 @@
-# Kawan Bus Pramusapa v0.2
+# Kawan Bus Pramusapa v0.3
 
-**Status:** Prototipe uji coba lokal  
+**Status:** Prototipe uji coba lokal dengan pemisahan peran  
 **Pengguna utama:** Pramusapa vendor di dalam bus  
 **Tujuan:** Mendukung pelayanan tanpa mengalihkan perhatian dari pelanggan.
 
@@ -44,3 +44,22 @@ Menampilkan catatan lokal dan membedakan kondisi yang dapat ditindaklanjuti deng
 ## Gerbang menuju pilot
 
 Sebelum digunakan dalam tugas nyata, diperlukan validasi IK/SOP, persetujuan pemilik proses, pemetaan eskalasi, integrasi penugasan, keamanan data, pelatihan singkat, dan UAT bersama Pramusapa, Korlap, vendor, serta fungsi terkait.
+
+
+## Pemisahan kewenangan penugasan
+
+### Admin Vendor
+
+- membuat penugasan Pramusapa;
+- menetapkan vendor, tanggal, rute, unit, shift, dan arah;
+- mengubah atau membatalkan penugasan;
+- memantau status konfirmasi.
+
+### Pramusapa
+
+- melihat penugasan yang dibuat Admin Vendor;
+- memeriksa kesesuaian tugas;
+- mengonfirmasi penugasan;
+- tidak dapat membuat atau mengubah penugasan.
+
+Pada prototipe statis, Konsol Admin Vendor dan halaman Pramusapa berbagi penyimpanan lokal hanya bila digunakan pada browser/perangkat yang sama. Penggunaan lintas perangkat memerlukan backend, autentikasi, otorisasi berbasis peran, serta audit trail.
