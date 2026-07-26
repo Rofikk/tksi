@@ -2,10 +2,10 @@
 <html lang="id">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#09283f">
-  <meta name="description" content="Kawan Bus membantu menyiapkan, mencatat, dan mempelajari perjalanan Transjakarta.">
-  <title>Kawan Bus Pilot — TKSI</title>
+  <meta name="description" content="Kawan Bus membantu Pramusapa memberikan pelayanan keselamatan, keamanan, kenyamanan, dan informasi.">
+  <title>Kawan Bus Pramusapa — TKSI</title>
   <link rel="canonical" href="https://rofikk.github.io/tksi/kawan-bus/">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
@@ -17,210 +17,141 @@
 <body>
   <a class="skip-link" href="#main">Lewati ke konten</a>
   <header class="app-header">
-    <a class="brand" href="../index.html" aria-label="Kembali ke portal TKSI">
-      <span class="brand-mark">K</span>
-      <span>Kawan Bus<small>Pilot pribadi · TKSI</small></span>
-    </a>
-    <nav class="app-global-nav" aria-label="Navigasi TKSI">
-      <a href="../index.html">Beranda</a>
-      <a href="../panduan.html">Mulai Belajar</a>
-      <a href="../domain.html">Pengetahuan</a>
-      <a class="active" aria-current="page" href="./">Kawan Bus</a>
-      <a href="../tentang.html">Tentang</a>
-    </nav>
-    <details class="app-mobile-menu">
+    <a class="brand" href="../index.html" aria-label="Kembali ke TKSI"><span class="brand-mark">K</span><span>Kawan Bus<small>Service Assistant · Pilot</small></span></a>
+    <span class="connection-state" title="Belum terhubung ke sistem operasional"><i></i> Lokal</span>
+    <details class="portal-menu">
       <summary>Menu</summary>
-      <nav aria-label="Navigasi TKSI seluler">
-        <a href="../index.html">Beranda</a>
-        <a href="../panduan.html">Mulai Belajar</a>
-        <a href="../domain.html">Pengetahuan</a>
-        <a class="active" aria-current="page" href="./">Kawan Bus</a>
-        <a href="../tentang.html">Tentang</a>
-      </nav>
+      <nav aria-label="Navigasi TKSI"><a href="../index.html">Beranda TKSI</a><a href="../panduan.html">Mulai Belajar</a><a href="../domain.html">Pengetahuan</a><a href="../tentang.html">Tentang</a></nav>
     </details>
-    <button class="install-button" id="install-app" type="button" hidden>Pasang</button>
   </header>
 
   <main id="main">
-    <section class="welcome">
-      <div>
-        <p class="eyebrow">Kawan Bus v0.1</p>
-        <h1>Siapkan perjalanan. Pelajari pelayanannya.</h1>
-        <p>Kawan Bus membantu Anda mempertimbangkan perjalanan Transjakarta, mencatat kenyataan di lapangan, dan menemukan pola masalah yang berulang.</p>
-      </div>
-      <aside class="pilot-notice">
-        <strong>Mode pilot pribadi</strong>
-        <p>Belum terhubung dengan posisi bus real-time. Rekomendasi awal adalah estimasi berbasis input dan histori yang tersimpan hanya di perangkat ini.</p>
-      </aside>
+    <section class="pilot-banner" role="note">
+      <strong>Versi uji coba</strong>
+      <p>Belum mengirim laporan atau panggilan bantuan ke sistem resmi. Dalam keadaan darurat, utamakan pelanggan dan gunakan prosedur komunikasi resmi yang berlaku.</p>
     </section>
 
-    <nav class="section-nav" aria-label="Bagian Kawan Bus">
-      <button class="active" type="button" data-view="plan" aria-pressed="true"><span>01</span>Rencanakan</button>
-      <button type="button" data-view="trip" aria-pressed="false"><span>02</span>Catat perjalanan</button>
-      <button type="button" data-view="learn" aria-pressed="false"><span>03</span>Pola &amp; temuan</button>
-    </nav>
-
-    <section class="app-view active" id="view-plan" data-panel="plan">
-      <div class="section-heading">
-        <div><p class="eyebrow">Sebelum berangkat</p><h2>Mau pergi ke mana?</h2></div>
-        <p>Masukkan kebutuhan perjalanan. Anda tetap menjadi pengambil keputusan.</p>
+    <section class="view active" id="view-duty" data-panel="duty">
+      <div class="greeting">
+        <div><p class="eyebrow">Tugas Hari Ini</p><h1 id="greeting-title">Siap membantu pelayanan?</h1><p id="greeting-copy">Konfirmasikan penugasan satu kali. Setelah itu, konteks laporan akan terisi otomatis.</p></div>
+        <button class="outline-button" id="edit-duty" type="button">Atur penugasan</button>
       </div>
 
-      <form class="planner" id="planner-form">
-        <div class="field wide">
-          <label for="origin">Dari mana?</label>
-          <input id="origin" name="origin" autocomplete="street-address" placeholder="Contoh: Stasiun Depok Baru" required>
-        </div>
-        <div class="field wide">
-          <label for="destination">Ke mana?</label>
-          <input id="destination" name="destination" autocomplete="street-address" placeholder="Contoh: Blok M" required>
-        </div>
-        <div class="field">
-          <label for="travel-date">Tanggal</label>
-          <input id="travel-date" name="date" type="date" required>
-        </div>
-        <div class="field">
-          <label for="arrival-time">Harus tiba</label>
-          <input id="arrival-time" name="arrival" type="time" required>
-        </div>
-        <div class="field">
-          <label for="base-duration">Perkiraan waktu normal</label>
-          <div class="input-suffix"><input id="base-duration" name="duration" type="number" min="10" max="300" value="60" required><span>menit</span></div>
-          <small>Isi berdasarkan pengalaman atau perencana perjalanan yang Anda gunakan.</small>
-        </div>
-        <div class="field">
-          <label for="reliability">Kondisi layanan yang Anda ketahui</label>
-          <select id="reliability" name="reliability">
-            <option value="unknown">Belum diketahui</option>
-            <option value="stable">Cenderung stabil</option>
-            <option value="variable">Sering berubah</option>
-            <option value="disrupted">Ada gangguan</option>
-          </select>
-        </div>
-        <fieldset class="preference wide">
-          <legend>Saya lebih memilih</legend>
-          <label><input type="radio" name="preference" value="reliable" checked><span>Lebih pasti tiba tepat waktu</span></label>
-          <label><input type="radio" name="preference" value="simple"><span>Lebih sedikit transit</span></label>
-          <label><input type="radio" name="preference" value="walk"><span>Lebih sedikit berjalan</span></label>
-        </fieldset>
-        <div class="form-actions wide">
-          <button class="primary-button" type="submit">Siapkan rekomendasi</button>
-          <p><span aria-hidden="true">●</span> Tidak mengirim data ke server</p>
-        </div>
-      </form>
-
-      <article class="recommendation" id="recommendation" hidden aria-live="polite">
-        <div class="recommendation-top">
-          <div><p class="eyebrow">Rekomendasi awal</p><h2 id="recommendation-title">Perjalanan dapat dipertimbangkan</h2></div>
-          <span class="confidence" id="confidence-badge">Keyakinan rendah</span>
-        </div>
-        <div class="decision-grid">
-          <div><small>Berangkat paling lambat</small><strong id="depart-time">—</strong></div>
-          <div><small>Cadangan waktu</small><strong id="buffer-time">—</strong></div>
-          <div><small>Rentang tiba</small><strong id="arrival-range">—</strong></div>
-        </div>
-        <div class="reason-box">
-          <h3>Mengapa Kawan Bus menyarankan ini?</h3>
-          <ul id="recommendation-reasons"></ul>
-        </div>
-        <div class="data-status">
-          <strong>Status data</strong>
-          <span>Input pengguna</span><span>Histori perangkat</span><span class="unavailable">Belum real-time</span>
-        </div>
-        <div class="recommendation-actions">
-          <button class="primary-button" id="accept-plan" type="button">Saya akan mencoba perjalanan ini</button>
-          <button class="text-button" id="dismiss-plan" type="button">Belum saya pilih</button>
+      <article class="duty-card" id="duty-card" hidden>
+        <div class="duty-status"><span>Aktif</span><small id="duty-date">—</small></div>
+        <h2 id="duty-route">—</h2>
+        <div class="duty-meta">
+          <div><small>Pramusapa</small><strong id="duty-officer">—</strong></div>
+          <div><small>Vendor</small><strong id="duty-vendor">—</strong></div>
+          <div><small>Unit</small><strong id="duty-unit">—</strong></div>
+          <div><small>Shift · Arah</small><strong id="duty-shift">—</strong></div>
         </div>
       </article>
-    </section>
 
-    <section class="app-view" id="view-trip" data-panel="trip" hidden>
-      <div class="section-heading">
-        <div><p class="eyebrow">Perjalanan aktual</p><h2>Apa yang terjadi di lapangan?</h2></div>
-        <p>Catat kejadian penting saja. Data ini digunakan untuk membandingkan rencana dengan kenyataan.</p>
-      </div>
-      <div class="empty-state" id="no-active-trip">
-        <span aria-hidden="true">◇</span>
-        <h3>Belum ada perjalanan aktif</h3>
-        <p>Buat rekomendasi lalu pilih “Saya akan mencoba perjalanan ini”.</p>
-        <button class="secondary-button" type="button" data-go="plan">Rencanakan perjalanan</button>
-      </div>
-      <form class="trip-form" id="trip-form" hidden>
-        <div class="active-trip-card">
-          <small>Perjalanan aktif</small>
-          <strong id="active-trip-route">—</strong>
-          <span id="active-trip-schedule">—</span>
+      <section class="service-priorities" aria-labelledby="priority-title">
+        <div class="section-heading"><div><p class="eyebrow">Prioritas pelayanan</p><h2 id="priority-title">Pelanggan tetap menjadi perhatian utama.</h2></div><p>Aplikasi hanya digunakan ketika kondisi memungkinkan dan tidak mengganggu pengawasan di dalam bus.</p></div>
+        <div class="priority-grid">
+          <article><span class="priority-icon shield">✓</span><div><h3>Keselamatan &amp; keamanan</h3><p>Kenali risiko, bantu pelanggan, lalu aktifkan prosedur resmi bila diperlukan.</p></div></article>
+          <article><span class="priority-icon comfort">○</span><div><h3>Kenyamanan</h3><p>Amati kondisi kabin dan kebutuhan pelanggan tanpa membuat laporan rutin berulang.</p></div></article>
+          <article><span class="priority-icon info">i</span><div><h3>Informasi</h3><p>Berikan jawaban singkat, jelas, dan sesuai informasi layanan yang tersedia.</p></div></article>
         </div>
-        <div class="time-grid">
-          <div class="field"><label for="actual-departure">Mulai berangkat</label><input id="actual-departure" type="time" required></div>
-          <div class="field"><label for="arrive-stop">Tiba di titik naik</label><input id="arrive-stop" type="time" required></div>
-          <div class="field"><label for="bus-arrival">Bus datang</label><input id="bus-arrival" type="time" required></div>
-          <div class="field"><label for="actual-arrival">Sampai tujuan</label><input id="actual-arrival" type="time" required></div>
-        </div>
-        <fieldset class="outcome">
-          <legend>Bagaimana perjalanan ini?</legend>
-          <label><input type="radio" name="outcome" value="smooth" checked><span>Lancar</span></label>
-          <label><input type="radio" name="outcome" value="problem"><span>Ada kendala</span></label>
-          <label><input type="radio" name="outcome" value="cancelled"><span>Tidak jadi naik</span></label>
-        </fieldset>
-        <div class="field" id="issue-field" hidden>
-          <label for="issue">Kendala utama</label>
-          <select id="issue">
-            <option value="">Pilih kendala</option>
-            <option value="long-wait">Menunggu terlalu lama</option>
-            <option value="full-bus">Bus penuh</option>
-            <option value="information">Informasi tidak sesuai</option>
-            <option value="transfer">Transit menyulitkan</option>
-            <option value="access">Akses halte/bus stop</option>
-            <option value="service">Pelayanan</option>
-            <option value="other">Lainnya</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="trip-note">Catatan singkat <span>(opsional)</span></label>
-          <textarea id="trip-note" rows="3" placeholder="Apa yang paling memengaruhi perjalanan?"></textarea>
-        </div>
-        <button class="primary-button" type="submit">Simpan hasil perjalanan</button>
-      </form>
-    </section>
-
-    <section class="app-view" id="view-learn" data-panel="learn" hidden>
-      <div class="section-heading">
-        <div><p class="eyebrow">Pembelajaran lokal</p><h2>Pola dan temuan perjalanan</h2></div>
-        <p>Temuan belum selalu berarti penyebab. Kawan Bus membedakan observasi, pola, dan dugaan.</p>
-      </div>
-      <div class="metric-grid">
-        <article><small>Perjalanan dicatat</small><strong id="metric-trips">0</strong><span>pengamatan</span></article>
-        <article><small>Rata-rata menunggu</small><strong id="metric-wait">—</strong><span>menit</span></article>
-        <article><small>Tiba tepat waktu</small><strong id="metric-ontime">—</strong><span>dari perjalanan</span></article>
-        <article><small>Kendala tercatat</small><strong id="metric-issues">0</strong><span>kejadian</span></article>
-      </div>
-      <div class="learning-layout">
-        <section>
-          <div class="subheading"><h3>Temuan awal</h3><span id="finding-count">0 temuan</span></div>
-          <div class="findings" id="findings-list"></div>
-        </section>
-        <aside class="method-card">
-          <p class="eyebrow">Cara membaca</p>
-          <ol>
-            <li><strong>Observasi</strong><span>Satu kejadian yang tercatat.</span></li>
-            <li><strong>Pola</strong><span>Kejadian serupa mulai berulang.</span></li>
-            <li><strong>Dugaan</strong><span>Penyebab yang masih perlu diuji.</span></li>
-            <li><strong>Perbaikan</strong><span>Tindakan terbatas dengan ukuran hasil.</span></li>
-          </ol>
-        </aside>
-      </div>
-      <section class="history-section">
-        <div class="subheading"><h3>Riwayat perjalanan</h3><button class="text-button danger" id="clear-data" type="button">Hapus data pilot</button></div>
-        <div class="history-list" id="history-list"></div>
       </section>
+
+      <section class="quick-actions" aria-labelledby="quick-title">
+        <div class="section-heading compact"><div><p class="eyebrow">Akses cepat</p><h2 id="quick-title">Apa yang dibutuhkan sekarang?</h2></div></div>
+        <div class="quick-grid">
+          <button type="button" data-go="assist"><span>?</span><strong>Bantu pelanggan</strong><small>Cari jawaban pelayanan</small></button>
+          <button type="button" data-go="report"><span>!</span><strong>Lapor kondisi</strong><small>Hanya jika ada pengecualian</small></button>
+          <button class="emergency-action" type="button" id="emergency-guide"><span>+</span><strong>Panduan darurat</strong><small>Belum terhubung ke kanal resmi</small></button>
+        </div>
+      </section>
+    </section>
+
+    <section class="view" id="view-assist" data-panel="assist" hidden>
+      <div class="page-heading"><button class="back-button" type="button" data-go="duty" aria-label="Kembali ke Tugas Hari Ini">←</button><div><p class="eyebrow">Bantu Pelanggan</p><h2>Jawaban cepat saat dibutuhkan.</h2><p>Gunakan sebagai pengingat. Pastikan informasi operasional berubah mengikuti kanal resmi.</p></div></div>
+      <label class="search-box" for="service-search"><span>Cari kebutuhan pelanggan</span><input id="service-search" type="search" placeholder="Contoh: transit, barang tertinggal, pelanggan prioritas" autocomplete="off"></label>
+      <div class="topic-chips" role="group" aria-label="Filter informasi"><button class="active" type="button" data-topic="all">Semua</button><button type="button" data-topic="trip">Perjalanan</button><button type="button" data-topic="safety">Keselamatan</button><button type="button" data-topic="comfort">Kenyamanan</button><button type="button" data-topic="priority">Prioritas</button></div>
+      <div class="answer-grid" id="answer-grid">
+        <article data-topic="trip" data-search="arah tujuan turun halte transit rute"><span>Perjalanan</span><h2>Pelanggan menanyakan arah atau titik turun</h2><ol><li>Pastikan tujuan pelanggan.</li><li>Periksa rute dan arah unit.</li><li>Sampaikan titik turun dan perpindahan secara singkat.</li><li>Jika belum yakin, nyatakan bahwa informasi perlu dikonfirmasi.</li></ol></article>
+        <article data-topic="trip" data-search="gangguan pengalihan rute alternatif"><span>Perjalanan</span><h2>Ada perubahan atau gangguan layanan</h2><ol><li>Gunakan informasi dari kanal operasional resmi.</li><li>Jelaskan dampaknya kepada pelanggan.</li><li>Sampaikan alternatif hanya jika telah terverifikasi.</li></ol></article>
+        <article data-topic="safety" data-search="jatuh sakit kecelakaan darurat keselamatan"><span>Keselamatan</span><h2>Pelanggan sakit, jatuh, atau membutuhkan pertolongan</h2><ol><li>Utamakan keselamatan dan amankan kondisi.</li><li>Koordinasikan dengan pramudi sesuai prosedur.</li><li>Gunakan kanal komunikasi resmi.</li><li>Catat kejadian setelah kondisi memungkinkan.</li></ol></article>
+        <article data-topic="safety" data-search="keamanan pelecehan pencurian konflik"><span>Keamanan</span><h2>Ada ancaman keamanan atau konflik</h2><ol><li>Jangan menempatkan diri atau pelanggan pada risiko tambahan.</li><li>Koordinasikan dengan pramudi dan petugas berwenang.</li><li>Jaga kerahasiaan identitas pelanggan.</li><li>Lengkapi kronologi setelah kondisi terkendali.</li></ol></article>
+        <article data-topic="comfort" data-search="ac panas kotor bau kursi kabin kenyamanan"><span>Kenyamanan</span><h2>Kondisi kabin mengganggu kenyamanan</h2><ol><li>Bantu kebutuhan pelanggan yang dapat ditangani langsung.</li><li>Identifikasi kondisi tanpa mengganggu pelayanan.</li><li>Gunakan Lapor Cepat jika membutuhkan tindak lanjut.</li></ol></article>
+        <article data-topic="priority" data-search="disabilitas lansia hamil anak prioritas kursi roda"><span>Pelanggan prioritas</span><h2>Pelanggan membutuhkan bantuan tambahan</h2><ol><li>Tanyakan bantuan yang dibutuhkan, jangan berasumsi.</li><li>Pastikan proses naik, berada di bus, dan turun berlangsung aman.</li><li>Koordinasikan bila membutuhkan fasilitas atau bantuan lanjutan.</li></ol></article>
+        <article data-topic="comfort" data-search="barang tertinggal kehilangan temuan"><span>Barang pelanggan</span><h2>Barang tertinggal atau ditemukan</h2><ol><li>Jangan membuka atau memindahkan tanpa kebutuhan.</li><li>Amankan sesuai prosedur yang berlaku.</li><li>Catat unit, rute, waktu, dan lokasi penemuan.</li><li>Serahkan melalui mekanisme resmi.</li></ol></article>
+      </div>
+      <p class="empty-result" id="answer-empty" hidden>Belum ada panduan untuk pencarian ini. Gunakan kanal resmi untuk memastikan jawaban.</p>
+    </section>
+
+    <section class="view" id="view-report" data-panel="report" hidden>
+      <div class="page-heading"><button class="back-button" type="button" data-go="duty" aria-label="Kembali ke Tugas Hari Ini">←</button><div><p class="eyebrow">Lapor Cepat</p><h2>Catat pengecualian, bukan rutinitas.</h2><p>Jika kondisi normal, tidak perlu membuat laporan.</p></div></div>
+      <form class="report-form" id="report-form">
+        <fieldset>
+          <legend>Jenis kondisi</legend>
+          <div class="report-types">
+            <label><input type="radio" name="category" value="safety" required><span><b>Keselamatan &amp; keamanan</b><small>Risiko, kejadian, konflik</small></span></label>
+            <label><input type="radio" name="category" value="comfort"><span><b>Kenyamanan</b><small>Kabin, fasilitas, kebersihan</small></span></label>
+            <label><input type="radio" name="category" value="information"><span><b>Informasi</b><small>Informasi berbeda atau tidak tersedia</small></span></label>
+            <label><input type="radio" name="category" value="service"><span><b>Pelayanan</b><small>Kebutuhan pelanggan lainnya</small></span></label>
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="condition">Kondisi yang ditemukan</label>
+          <select id="condition" required disabled><option value="">Pilih jenis kondisi terlebih dahulu</option></select>
+        </div>
+        <fieldset>
+          <legend>Tingkat kebutuhan tindak lanjut</legend>
+          <div class="urgency-options">
+            <label><input type="radio" name="urgency" value="normal" checked><span>Dapat ditindaklanjuti</span></label>
+            <label><input type="radio" name="urgency" value="soon"><span>Perlu segera diperiksa</span></label>
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="report-note">Catatan singkat <span>opsional</span></label>
+          <textarea id="report-note" rows="3" maxlength="300" placeholder="Tulis fakta penting saja, tanpa data pribadi pelanggan."></textarea>
+          <small><b id="note-count">0</b>/300 karakter</small>
+        </div>
+        <div class="auto-context"><strong>Konteks otomatis</strong><p id="report-context">Atur penugasan agar rute dan unit tercatat otomatis.</p></div>
+        <button class="primary-button" type="submit">Simpan laporan lokal</button>
+        <p class="submit-note">Versi pilot belum mengirim laporan kepada Korlap, vendor, atau pengendali.</p>
+      </form>
+      <div class="success-card" id="report-success" hidden aria-live="polite"><span>✓</span><h2>Laporan tersimpan di perangkat.</h2><p>Belum terkirim ke sistem resmi. Lanjutkan komunikasi melalui prosedur yang berlaku.</p><button class="primary-button" type="button" data-go="duty">Kembali melayani</button></div>
+    </section>
+
+    <section class="view" id="view-history" data-panel="history" hidden>
+      <div class="page-heading"><div><p class="eyebrow">Riwayat Lokal</p><h2>Catatan dan tindak lanjut.</h2><p>Semua catatan masih tersimpan di perangkat ini dan belum menjadi laporan resmi.</p></div></div>
+      <div class="history-summary"><article><small>Laporan tersimpan</small><strong id="report-count">0</strong></article><article><small>Perlu segera diperiksa</small><strong id="urgent-count">0</strong></article><article><small>Status pengiriman</small><strong>Belum terhubung</strong></article></div>
+      <div class="history-list" id="history-list"></div>
+      <button class="text-button danger" id="clear-reports" type="button">Hapus riwayat lokal</button>
     </section>
   </main>
 
-  <footer>
-    <p><strong>Kawan Bus Pilot</strong> · Sebuah eksperimen pembelajaran perjalanan oleh TKSI.</p>
-    <nav aria-label="Navigasi footer Kawan Bus"><a href="../index.html">Beranda TKSI</a><a href="../domain.html">Pengetahuan</a><a href="../tentang.html">Tentang</a></nav>
-  </footer>
+  <nav class="bottom-nav" aria-label="Menu utama Kawan Bus">
+    <button class="active" type="button" data-view="duty" aria-pressed="true"><span>⌂</span>Tugas</button>
+    <button type="button" data-view="assist" aria-pressed="false"><span>?</span>Bantu</button>
+    <button type="button" data-view="report" aria-pressed="false"><span>!</span>Lapor</button>
+    <button type="button" data-view="history" aria-pressed="false"><span>≡</span>Riwayat</button>
+  </nav>
+
+  <dialog id="duty-dialog">
+    <form method="dialog" id="duty-form">
+      <div class="dialog-heading"><div><p class="eyebrow">Satu kali per tugas</p><h2>Konfirmasi penugasan</h2></div><button value="cancel" aria-label="Tutup">×</button></div>
+      <div class="field"><label for="officer-name">Nama Pramusapa</label><input id="officer-name" autocomplete="name" required></div>
+      <div class="field"><label for="vendor">Vendor</label><select id="vendor" required><option value="">Pilih vendor</option><option>PT BDP</option><option>PT WMI</option><option>Lainnya</option></select></div>
+      <div class="field-row"><div class="field"><label for="route">Rute</label><input id="route" placeholder="Contoh: P11" required></div><div class="field"><label for="unit">Nomor unit</label><input id="unit" placeholder="Contoh: TJ-516" required></div></div>
+      <div class="field-row"><div class="field"><label for="shift">Shift</label><select id="shift" required><option>Pagi</option><option>Siang</option><option>Malam</option></select></div><div class="field"><label for="direction">Arah</label><input id="direction" placeholder="Contoh: Blok M → Bogor" required></div></div>
+      <button class="primary-button" value="default" type="submit">Aktifkan tugas</button>
+      <p>Data tersimpan hanya di perangkat ini.</p>
+    </form>
+  </dialog>
+
+  <dialog id="emergency-dialog">
+    <div class="emergency-dialog-content">
+      <span class="warning-icon">!</span><p class="eyebrow">Belum terhubung ke kanal resmi</p><h2>Utamakan keselamatan pelanggan.</h2>
+      <ol><li>Amankan kondisi tanpa menambah risiko.</li><li>Koordinasikan dengan pramudi.</li><li>Gunakan alat atau kanal komunikasi resmi yang berlaku.</li><li>Catat kejadian setelah situasi memungkinkan.</li></ol>
+      <button class="primary-button" id="close-emergency" type="button">Saya mengerti</button>
+    </div>
+  </dialog>
   <script src="app.js"></script>
 </body>
 </html>
