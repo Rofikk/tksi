@@ -1,5 +1,7 @@
 # Arsitektur Kawan Bus v0.1
 
+> **Catatan pembaruan 26 Juli 2026:** prototipe aktif telah diarahkan ulang menjadi **Kawan Bus Pramusapa v0.2** untuk mendukung keselamatan dan keamanan, kenyamanan, serta informasi tanpa mengganggu pelayanan utama. Dokumen ini dipertahankan sebagai riwayat arsitektur konseptual awal. Lihat [Kawan Bus Pramusapa v0.2](kawan-bus-pramusapa-v0.2.md).
+
 **Status:** Concept Architecture  
 **Versi:** 0.1  
 **Tanggal:** 26 Juli 2026  
@@ -501,4 +503,3 @@ Arsitektur v0.1 dapat dilanjutkan menjadi desain rinci setelah tersedia:
 - daftar data yang benar-benar tersedia;
 - baseline kinerja;
 - batas keputusan yang disetujui.
-
