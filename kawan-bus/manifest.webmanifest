@@ -1,6 +1,6 @@
 {
-  "name": "Kawan Bus Pramusapa — TKSI",
-  "short_name": "Kawan Bus",
+  "name": "Kawan Bus Petugas — TKSI",
+  "short_name": "KB Petugas",
   "description": "Asisten pelayanan Pramusapa untuk keselamatan, keamanan, kenyamanan, dan informasi.",
   "start_url": "./",
   "display": "standalone",
