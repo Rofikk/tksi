@@ -46,3 +46,7 @@
 .material-visual i{color:var(--card-accent);font-style:normal;font-size:15px;font-weight:900;text-align:center}
 .answer-grid article[data-urgency="critical"] .material-visual{background:linear-gradient(135deg,#fff1ef,#fff)}
 @media(max-width:420px){.material-visual{grid-template-columns:minmax(0,1fr) 12px minmax(0,1fr) 12px minmax(0,1fr);padding:10px 7px}.material-visual b{width:27px;height:27px}.material-visual small{font-size:8px}.material-visual i{font-size:12px}}
+
+
+/* Complete bus manual integration v0.8 */
+@media(min-width:761px){.quick-grid{grid-template-columns:repeat(2,1fr)}}
