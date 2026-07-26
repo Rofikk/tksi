@@ -7,7 +7,7 @@ const save=(key,value)=>localStorage.setItem(key,JSON.stringify(value));
 const esc=value=>{const d=document.createElement('div');d.textContent=String(value??'');return d.innerHTML};
 const uid=prefix=>crypto.randomUUID?.()||`${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
-const statusName={assigned:'Menunggu konfirmasi',offered:'Ditawarkan',confirmed:'Dikonfirmasi',declined:'Ditolak',cancelled:'Dibatalkan'};
+const statusName={assigned:'Menunggu konfirmasi',offered:'Ditawarkan',confirmed:'Dikonfirmasi',declined:'Ditolak',expired:'Kedaluwarsa',cancelled:'Dibatalkan'};
 
 $$('[data-admin-tab]').forEach(button=>button.addEventListener('click',()=>{
   $$('[data-admin-tab]').forEach(item=>item.classList.toggle('active',item===button));
