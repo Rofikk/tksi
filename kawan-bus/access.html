@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#09283f">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Akses Internal — Kawan Bus</title>
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app.css">
+  <style>
+    body{min-height:100vh;padding:0;background:linear-gradient(145deg,#061d2e,#0d5065);display:grid;place-items:center}.access-shell{width:min(100% - 28px,480px);margin:30px auto}.access-brand{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:20px;color:#fff;text-decoration:none}.access-brand .brand-mark{width:46px;height:46px}.access-brand strong,.access-brand small{display:block}.access-brand small{color:#a9c4ce;font-size:10px}.access-card{padding:27px;border:1px solid rgba(255,255,255,.15);border-radius:22px;background:#fff;box-shadow:0 28px 80px rgba(0,0,0,.28)}.access-card h1{margin:0;color:var(--navy);font-size:30px}.access-card>p{margin:8px 0 21px;color:var(--muted);font-size:13px}.access-card form{display:grid;gap:15px}.access-card .primary-button{width:100%}.access-note{margin:18px 0 0;padding:13px;border-radius:11px;background:var(--soft);color:var(--muted);font-size:10px}.access-error{padding:10px;border-radius:10px;background:var(--danger-soft);color:var(--danger);font-size:11px;font-weight:700}.access-footer{margin:15px 0 0;color:#a9c4ce;font-size:10px;text-align:center}.access-footer a{color:#fff}
+  </style>
+</head>
+<body>
+  <main class="access-shell">
+    <a class="access-brand" href="../index.html"><span class="brand-mark">K</span><span><strong>Kawan Bus</strong><small>Area internal Non-BRT</small></span></a>
+    <section class="access-card">
+      <p class="eyebrow">Akses terbatas</p>
+      <h1>Masuk ke Kawan Bus</h1>
+      <p>Hanya untuk tim Pramusapa organik/vendor, Buffer, Admin Vendor, Danru, Korlap, dan Korwil Non-BRT.</p>
+      <div class="access-error" id="access-error" hidden></div>
+      <form id="access-form">
+        <div class="field"><label for="access-role">Peran</label><select id="access-role" required><option value="">Pilih peran</option><option value="pramusapa_organik">Pramusapa Organik</option><option value="pramusapa_vendor">Pramusapa Vendor</option><option value="buffer">Pramusapa Pengganti (Buffer)</option><option value="admin_vendor">Admin Vendor</option><option value="danru">Danru</option><option value="korlap">Korlap</option><option value="korwil">Korwil Non-BRT</option></select></div>
+        <div class="field"><label for="access-code">Kode akses pengembangan</label><input id="access-code" type="password" autocomplete="current-password" required></div>
+        <button class="primary-button" type="submit">Buka akses internal</button>
+      </form>
+      <p class="access-note"><strong>Versi pengembangan:</strong> sesi berlaku delapan jam pada tab browser ini. Jangan membagikan kode melalui kanal publik.</p>
+    </section>
+    <p class="access-footer">Bukan bagian portal publik. <a href="../index.html">Kembali ke TKSI</a></p>
+  </main>
+  <script>
+    const SESSION_KEY='kawan-bus-internal-session-v1';
+    const ACCESS_HASH='f3b75582a9bc2c99a4f62b929bca5835e6bcdd4b3fe4f6399e5361bf3cdf02e3';
+    const MAX_AGE=8*60*60*1000;
+    const roleHomes={pramusapa_organik:'./',pramusapa_vendor:'./',buffer:'reliever.html',admin_vendor:'admin.html',danru:'admin.html',korlap:'admin.html',korwil:'admin.html'};
+    const allowed=(role,target)=>{
+      const page=(target.split('?')[0].split('#')[0].split('/').pop()||'index.html');
+      if(page==='admin.html')return ['admin_vendor','danru','korlap','korwil'].includes(role);
+      if(page==='reliever.html')return ['buffer','pramusapa_vendor','admin_vendor','danru','korlap','korwil'].includes(role);
+      return ['index.html','','panduan.html','pedoman-bus.html'].includes(page);
+    };
+    const toHex=buffer=>[...new Uint8Array(buffer)].map(value=>value.toString(16).padStart(2,'0')).join('');
+    const params=new URLSearchParams(location.search);
+    if(params.has('denied')){const box=document.querySelector('#access-error');box.hidden=false;box.textContent='Peran yang dipilih tidak memiliki akses ke halaman tersebut.'}
+    document.querySelector('#access-form').addEventListener('submit',async event=>{
+      event.preventDefault();
+      const role=document.querySelector('#access-role').value;
+      const code=document.querySelector('#access-code').value;
+      const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(code));
+      if(toHex(digest)!==ACCESS_HASH){const box=document.querySelector('#access-error');box.hidden=false;box.textContent='Kode akses tidak sesuai.';document.querySelector('#access-code').select();return}
+      sessionStorage.setItem(SESSION_KEY,JSON.stringify({role,issuedAt:Date.now(),expiresAt:Date.now()+MAX_AGE}));
+      const requested=params.get('next');
+      location.replace(requested&&allowed(role,requested)?requested:roleHomes[role]);
+    });
+  </script>
+</body>
+</html>
