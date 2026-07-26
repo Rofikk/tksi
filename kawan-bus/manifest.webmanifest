@@ -1,7 +1,7 @@
 {
-  "name": "Kawan Bus Pilot — TKSI",
+  "name": "Kawan Bus Pramusapa — TKSI",
   "short_name": "Kawan Bus",
-  "description": "Asisten pembelajaran perjalanan Transjakarta.",
+  "description": "Asisten pelayanan Pramusapa untuk keselamatan, keamanan, kenyamanan, dan informasi.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#f7faf9",
