@@ -40,7 +40,7 @@ function renderDuty(){
     return;
   }
   $('#greeting-title').textContent=confirmed?`Selamat bertugas, ${duty.officer.split(' ')[0]}.`:'Periksa penugasan Anda.';
-  $('#greeting-copy').textContent=confirmed?'Gunakan Kawan Bus hanya ketika kondisi memungkinkan dan pelanggan tetap terpantau.':'Pastikan rute, unit, shift, dan arah sudah sesuai sebelum mengonfirmasi.';
+  $('#greeting-copy').textContent=confirmed?'Gunakan Kawan Bus Petugas hanya ketika kondisi memungkinkan dan pelanggan tetap terpantau.':'Pastikan rute, unit, shift, dan arah sudah sesuai sebelum mengonfirmasi.';
   $('#assignment-status').textContent=confirmed?'Dikonfirmasi':'Menunggu konfirmasi';
   $('#duty-date').textContent=formatDate(new Date(duty.date+'T12:00:00'));
   $('#duty-route').textContent=`Rute ${duty.route} · ${duty.direction}`;
