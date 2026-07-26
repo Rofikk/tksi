@@ -1,12 +1,75 @@
 <!doctype html>
-<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#09283f"><meta name="robots" content="noindex"><title>Konsol Admin Vendor — Kawan Bus</title><link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="app.css"></head>
-<body><header class="app-header"><a class="brand" href="./"><span class="brand-mark">A</span><span>Admin Vendor<small>Kawan Bus · Prototipe</small></span></a><a class="outline-button" href="./">Lihat sebagai Pramusapa</a></header>
-<main class="admin-main"><div class="admin-heading"><div><p class="eyebrow">Konsol Penugasan</p><h1>Atur petugas dan pelayanan.</h1><p>Admin Vendor membuat, mengubah, dan membatalkan penugasan. Pramusapa hanya melihat serta mengonfirmasi.</p></div></div>
-<div class="admin-limit"><strong>Batas prototipe:</strong> data hanya tersimpan pada browser ini. Belum ada akun, otorisasi, sinkronisasi lintas perangkat, atau integrasi data vendor.</div>
-<div class="admin-grid"><form class="assignment-form" id="admin-assignment-form"><h2>Buat penugasan</h2>
-<div class="field-row"><div class="field"><label for="admin-officer">Nama Pramusapa</label><input id="admin-officer" required></div><div class="field"><label for="admin-nik">NIK/ID Vendor <span>opsional</span></label><input id="admin-nik"></div></div>
-<div class="field-row"><div class="field"><label for="admin-vendor">Vendor</label><select id="admin-vendor" required><option value="">Pilih vendor</option><option>PT BDP</option><option>PT WMI</option><option>Lainnya</option></select></div><div class="field"><label for="admin-date">Tanggal tugas</label><input id="admin-date" type="date" required></div></div>
-<div class="field-row"><div class="field"><label for="admin-route">Rute</label><input id="admin-route" placeholder="Contoh: P11" required></div><div class="field"><label for="admin-unit">Nomor unit</label><input id="admin-unit" placeholder="Contoh: TJ-516" required></div></div>
-<div class="field-row"><div class="field"><label for="admin-shift">Shift</label><select id="admin-shift" required><option>Pagi</option><option>Siang</option><option>Malam</option></select></div><div class="field"><label for="admin-direction">Arah</label><input id="admin-direction" placeholder="Contoh: Blok M → Bogor" required></div></div>
-<button class="primary-button" type="submit">Simpan penugasan</button></form>
-<section class="admin-list-panel"><h2>Daftar penugasan lokal</h2><div class="admin-assignment-list" id="admin-assignment-list"></div></section></div></main><script src="admin.js"></script></body></html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#09283f">
+  <meta name="robots" content="noindex">
+  <title>Konsol Admin Vendor — Kawan Bus</title>
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app.css">
+  <style>
+    .admin-tabs{display:flex;gap:8px;overflow:auto;margin:0 0 20px}.admin-tabs button{flex:0 0 auto;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--muted);font-weight:800}.admin-tabs button.active{background:var(--navy);color:#fff}.admin-panel[hidden]{display:none}.fairness-card{margin-bottom:18px;padding:18px;border:1px solid #b8d8d2;border-radius:16px;background:#f1faf7}.fairness-card h2{margin-bottom:6px;color:var(--navy);font-size:18px}.fairness-card p{margin:0;color:var(--muted);font-size:12px}.candidate-card{padding:16px;border:1px solid var(--line);border-radius:13px;background:#fff}.candidate-rank{display:flex;align-items:start;gap:12px}.candidate-rank>span{display:grid;place-items:center;flex:0 0 34px;height:34px;border-radius:10px;background:var(--navy);color:#fff;font-weight:800}.candidate-rank h3{margin:0;color:var(--navy);font-size:15px}.candidate-rank p{margin:4px 0 0;color:var(--muted);font-size:11px}.candidate-card button{width:100%;margin-top:12px}.mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.mini-stats div{padding:9px;border-radius:9px;background:var(--soft)}.mini-stats small,.mini-stats strong{display:block}.mini-stats small{color:var(--muted);font-size:9px}.mini-stats strong{color:var(--navy);font-size:13px}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.toolbar h2{margin:0}.badge-pkwt,.badge-reliever{display:inline-block;padding:4px 7px;border-radius:6px;font-size:9px;font-weight:800}.badge-pkwt{background:#eaf3f7;color:var(--blue)}.badge-reliever{background:#fff0e5;color:#9b4b16}@media(max-width:560px){.mini-stats{grid-template-columns:1fr}.app-header .outline-button{font-size:10px}}
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="./"><span class="brand-mark">A</span><span>Admin Vendor<small>Kawan Bus · Prototipe</small></span></a>
+    <a class="outline-button" href="reliever.html">Portal Reliever</a>
+    <a class="outline-button" href="./">Pramusapa</a>
+  </header>
+  <main class="admin-main">
+    <div class="admin-heading"><div><p class="eyebrow">Konsol Penugasan</p><h1>Atur petugas secara adil.</h1><p>Jadwal PKWT dibuat langsung oleh Admin Vendor. Kekosongan PKWT ditawarkan kepada reliever berdasarkan ketersediaan dan pemerataan kesempatan.</p></div></div>
+    <div class="admin-limit"><strong>Batas prototipe:</strong> data masih tersimpan pada browser yang sama. Belum ada akun, basis data terpusat, atau otorisasi resmi.</div>
+    <nav class="admin-tabs" aria-label="Menu konsol">
+      <button class="active" type="button" data-admin-tab="pkwt">Jadwal PKWT</button>
+      <button type="button" data-admin-tab="replacement">Cari Pengganti</button>
+      <button type="button" data-admin-tab="relievers">Daftar Reliever</button>
+      <button type="button" data-admin-tab="assignments">Semua Penugasan</button>
+    </nav>
+
+    <section class="admin-panel" data-admin-panel="pkwt">
+      <div class="admin-grid">
+        <form class="assignment-form" id="pkwt-form">
+          <h2>Buat jadwal PKWT</h2>
+          <div class="field-row"><div class="field"><label for="pkwt-officer">Nama Pramusapa</label><input id="pkwt-officer" required></div><div class="field"><label for="pkwt-nik">NIK/ID Vendor</label><input id="pkwt-nik" required></div></div>
+          <div class="field-row"><div class="field"><label for="pkwt-vendor">Vendor</label><select id="pkwt-vendor" required><option value="">Pilih vendor</option><option>PT BDP</option><option>PT WMI</option><option>Lainnya</option></select></div><div class="field"><label for="pkwt-date">Tanggal tugas</label><input id="pkwt-date" type="date" required></div></div>
+          <div class="field-row"><div class="field"><label for="pkwt-route">Rute</label><input id="pkwt-route" placeholder="Contoh: P11" required></div><div class="field"><label for="pkwt-unit">Nomor unit</label><input id="pkwt-unit" placeholder="Contoh: TJ-516" required></div></div>
+          <div class="field-row"><div class="field"><label for="pkwt-shift">Shift</label><select id="pkwt-shift" required><option>Pagi</option><option>Siang</option><option>Malam</option></select></div><div class="field"><label for="pkwt-direction">Arah</label><input id="pkwt-direction" placeholder="Contoh: Blok M → Bogor" required></div></div>
+          <button class="primary-button" type="submit">Simpan jadwal PKWT</button>
+        </form>
+        <section class="admin-list-panel"><h2>Jadwal PKWT terbaru</h2><div class="admin-assignment-list" id="pkwt-list"></div></section>
+      </div>
+    </section>
+
+    <section class="admin-panel" data-admin-panel="replacement" hidden>
+      <div class="fairness-card"><h2>Tidak menggunakan sistem war</h2><p>Kandidat diurutkan dari jumlah tugas paling sedikit, kesesuaian ketersediaan, lalu petugas yang paling lama belum memperoleh tugas. Admin tetap memverifikasi dan menetapkan petugas.</p></div>
+      <div class="admin-grid">
+        <form class="assignment-form" id="replacement-form">
+          <h2>Kebutuhan pengganti</h2>
+          <div class="field-row"><div class="field"><label for="replacement-for">Menggantikan PKWT</label><input id="replacement-for" placeholder="Nama/NIK petugas berhalangan" required></div><div class="field"><label for="replacement-reason">Alasan terverifikasi</label><select id="replacement-reason" required><option value="">Pilih alasan</option><option>Sakit</option><option>Izin</option><option>Cuti</option><option>Dispensasi</option><option>Lainnya</option></select></div></div>
+          <div class="field-row"><div class="field"><label for="replacement-date">Tanggal</label><input id="replacement-date" type="date" required></div><div class="field"><label for="replacement-shift">Shift</label><select id="replacement-shift" required><option>Pagi</option><option>Siang</option><option>Malam</option></select></div></div>
+          <div class="field-row"><div class="field"><label for="replacement-route">Rute</label><input id="replacement-route" required></div><div class="field"><label for="replacement-unit">Nomor unit</label><input id="replacement-unit" required></div></div>
+          <div class="field-row"><div class="field"><label for="replacement-area">Wilayah/titik tugas</label><input id="replacement-area" placeholder="Contoh: Blok M" required></div><div class="field"><label for="replacement-direction">Arah</label><input id="replacement-direction" required></div></div>
+          <button class="primary-button" type="submit">Tampilkan rekomendasi</button>
+        </form>
+        <section class="admin-list-panel"><div class="toolbar"><h2>Urutan kandidat</h2><span class="badge-reliever">RELIEVER</span></div><div class="admin-assignment-list" id="candidate-list"><div class="blank-list">Isi kebutuhan pengganti untuk melihat kandidat yang tersedia.</div></div></section>
+      </div>
+    </section>
+
+    <section class="admin-panel" data-admin-panel="relievers" hidden>
+      <div class="toolbar"><div><h2>Reliever terdaftar</h2><p>Data ketersediaan diisi melalui Portal Reliever.</p></div><a class="outline-button" href="reliever.html">Buka Portal Reliever</a></div>
+      <div class="admin-assignment-list" id="reliever-list"></div>
+    </section>
+
+    <section class="admin-panel" data-admin-panel="assignments" hidden>
+      <div class="toolbar"><h2>Semua penugasan lokal</h2></div>
+      <div class="admin-assignment-list" id="admin-assignment-list"></div>
+    </section>
+  </main>
+  <script src="admin.js"></script>
+</body>
+</html>
