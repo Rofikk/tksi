@@ -116,3 +116,5 @@ $('#close-emergency').addEventListener('click',()=>$('#emergency-dialog').close(
 addEventListener('storage',event=>{if(event.key===ASSIGNMENT_KEY){renderDuty();renderReportContext()}});
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
 renderDuty();renderReportContext();renderHistory();
+const requestedView=new URLSearchParams(location.search).get('view');
+if(['duty','assist','report','history'].includes(requestedView))showView(requestedView);
