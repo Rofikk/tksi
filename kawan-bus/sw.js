@@ -1,4 +1,4 @@
-const CACHE='kawan-bus-pramusapa-v0.6.0';
+const CACHE='kawan-bus-pramusapa-v0.7.0';
 const ASSETS=['./','index.html','app.css','app.js','manifest.webmanifest','admin.html','admin.js','reliever.html','reliever.js','panduan.html','../assets/img/favicon.svg'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key))))));
