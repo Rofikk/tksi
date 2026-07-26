@@ -68,19 +68,81 @@
     </section>
 
     <section class="view" id="view-assist" data-panel="assist" hidden>
-      <div class="page-heading"><button class="back-button" type="button" data-go="duty" aria-label="Kembali ke Tugas Hari Ini">←</button><div><p class="eyebrow">Bantu Pelanggan</p><h2>Jawaban cepat saat dibutuhkan.</h2><p>Gunakan sebagai pengingat. Pastikan informasi operasional berubah mengikuti kanal resmi.</p></div></div>
-      <label class="search-box" for="service-search"><span>Cari kebutuhan pelanggan</span><input id="service-search" type="search" placeholder="Contoh: transit, barang tertinggal, pelanggan prioritas" autocomplete="off"></label>
-      <div class="topic-chips" role="group" aria-label="Filter informasi"><button class="active" type="button" data-topic="all">Semua</button><button type="button" data-topic="trip">Perjalanan</button><button type="button" data-topic="safety">Keselamatan</button><button type="button" data-topic="comfort">Kenyamanan</button><button type="button" data-topic="priority">Prioritas</button></div>
+      <div class="page-heading"><button class="back-button" type="button" data-go="duty" aria-label="Kembali ke Tugas Hari Ini">←</button><div><p class="eyebrow">Bantu Pelanggan</p><h2>Pedoman cepat pelayanan di dalam bus.</h2><p>Pilih situasi untuk melihat tindakan ringkas. Pelayanan langsung kepada pelanggan tetap didahulukan.</p></div></div>
+      <section class="pilot-banner" role="note">
+        <strong>Sumber resmi</strong>
+        <p>Peraturan Direksi PT Transportasi Jakarta Nomor 33 Tahun 2024 tentang Pedoman Pelayanan oleh Pramusapa · Pedoman Revisi 1 · efektif 1 November 2024. Ringkasan ini memakai ketentuan khusus kolom “Di Bus (Jika Ada)” pada Bagian 2.</p>
+      </section>
+      <label class="search-box" for="service-search"><span>Cari situasi atau kebutuhan pelanggan</span><input id="service-search" type="search" placeholder="Contoh: arah, pembayaran, barang tertinggal, disabilitas" autocomplete="off"></label>
+      <div class="topic-chips" role="group" aria-label="Filter pedoman pelayanan"><button class="active" type="button" data-topic="all">Semua</button><button type="button" data-topic="service">Ramah</button><button type="button" data-topic="direction">Mengarahkan</button><button type="button" data-topic="education">Mengedukasi</button><button type="button" data-topic="solution">Solusi</button><button type="button" data-topic="priority">Prioritas</button></div>
       <div class="answer-grid" id="answer-grid">
-        <article data-topic="trip" data-search="arah tujuan turun halte transit rute"><span>Perjalanan</span><h2>Pelanggan menanyakan arah atau titik turun</h2><ol><li>Pastikan tujuan pelanggan.</li><li>Periksa rute dan arah unit.</li><li>Sampaikan titik turun dan perpindahan secara singkat.</li><li>Jika belum yakin, nyatakan bahwa informasi perlu dikonfirmasi.</li></ol></article>
-        <article data-topic="trip" data-search="gangguan pengalihan rute alternatif"><span>Perjalanan</span><h2>Ada perubahan atau gangguan layanan</h2><ol><li>Gunakan informasi dari kanal operasional resmi.</li><li>Jelaskan dampaknya kepada pelanggan.</li><li>Sampaikan alternatif hanya jika telah terverifikasi.</li></ol></article>
-        <article data-topic="safety" data-search="jatuh sakit kecelakaan darurat keselamatan"><span>Keselamatan</span><h2>Pelanggan sakit, jatuh, atau membutuhkan pertolongan</h2><ol><li>Utamakan keselamatan dan amankan kondisi.</li><li>Koordinasikan dengan pramudi sesuai prosedur.</li><li>Gunakan kanal komunikasi resmi.</li><li>Catat kejadian setelah kondisi memungkinkan.</li></ol></article>
-        <article data-topic="safety" data-search="keamanan pelecehan pencurian konflik"><span>Keamanan</span><h2>Ada ancaman keamanan atau konflik</h2><ol><li>Jangan menempatkan diri atau pelanggan pada risiko tambahan.</li><li>Koordinasikan dengan pramudi dan petugas berwenang.</li><li>Jaga kerahasiaan identitas pelanggan.</li><li>Lengkapi kronologi setelah kondisi terkendali.</li></ol></article>
-        <article data-topic="comfort" data-search="ac panas kotor bau kursi kabin kenyamanan"><span>Kenyamanan</span><h2>Kondisi kabin mengganggu kenyamanan</h2><ol><li>Bantu kebutuhan pelanggan yang dapat ditangani langsung.</li><li>Identifikasi kondisi tanpa mengganggu pelayanan.</li><li>Gunakan Lapor Cepat jika membutuhkan tindak lanjut.</li></ol></article>
-        <article data-topic="priority" data-search="disabilitas lansia hamil anak prioritas kursi roda"><span>Pelanggan prioritas</span><h2>Pelanggan membutuhkan bantuan tambahan</h2><ol><li>Tanyakan bantuan yang dibutuhkan, jangan berasumsi.</li><li>Pastikan proses naik, berada di bus, dan turun berlangsung aman.</li><li>Koordinasikan bila membutuhkan fasilitas atau bantuan lanjutan.</li></ol></article>
-        <article data-topic="comfort" data-search="barang tertinggal kehilangan temuan"><span>Barang pelanggan</span><h2>Barang tertinggal atau ditemukan</h2><ol><li>Jangan membuka atau memindahkan tanpa kebutuhan.</li><li>Amankan sesuai prosedur yang berlaku.</li><li>Catat unit, rute, waktu, dan lokasi penemuan.</li><li>Serahkan melalui mekanisme resmi.</li></ol></article>
+        <article data-topic="service" data-search="tije terampil inklusif jelas empatik salam ramah menyapa">
+          <span>Dasar layanan tije</span><h2>Berikan layanan yang ramah dan mudah dipahami</h2>
+          <ol><li>Berikan salam, keramahan, dan kehangatan ketika berpapasan dengan pelanggan.</li><li>Dengarkan kebutuhan pelanggan sebelum memberikan arahan.</li><li>Sampaikan informasi dengan jelas, inklusif, terampil, dan empatik.</li></ol>
+          <p><small>Dasar: Bagian 1 angka 1.2 dan 1.4.25-1.4.29; Bagian 2 angka 2.4.6(1).</small></p>
+        </article>
+        <article data-topic="service" data-search="informasi rute jadwal kedatangan keberangkatan pembayaran fasilitas perubahan integrasi lost found">
+          <span>Pramusapa yang ramah</span><h2>Pelanggan meminta informasi layanan</h2>
+          <ol><li>Pastikan kebutuhan dan tujuan pelanggan.</li><li>Informasikan atau pandu seputar rute, jadwal, ketersediaan bus, cara pembayaran, perubahan layanan, integrasi moda, lost and found, akses disabilitas, atau layanan Transjakarta lainnya.</li><li>Jika informasi belum terverifikasi, konfirmasikan melalui kanal operasional resmi.</li></ol>
+          <p><small>Dasar: Bagian 2 angka 2.4.6(1) huruf c, kolom Di Bus.</small></p>
+        </article>
+        <article data-topic="direction" data-search="antrean masuk keluar bus naik turun kepadatan prioritas">
+          <span>Pramusapa yang mengarahkan</span><h2>Atur pelanggan naik dan turun bus</h2>
+          <ol><li>Atur antrean masuk dan keluar bus.</li><li>Pada kondisi padat, arahkan pergerakan pelanggan ketika naik dan turun.</li><li>Dahulukan akses yang aman bagi pelanggan prioritas.</li></ol>
+          <p><small>Dasar: Bagian 2 angka 2.4.6(2) huruf a-c, kolom Di Bus.</small></p>
+        </article>
+        <article data-topic="direction" data-search="merokok menyerobot keras bus wanita kriminal pelecehan keamanan ketertiban">
+          <span>Ketertiban dan keamanan</span><h2>Ada perilaku yang mengganggu pelanggan</h2>
+          <ol><li>Cegah dan ambil tindakan dalam batas aman terhadap antrean tidak teratur, merokok, suara terlalu keras, atau gangguan ketertiban lainnya.</li><li>Untuk tindakan kriminal, pelecehan seksual, atau kejahatan lain, segera laporkan dan minta bantuan Pramujaga, Korlap, atau rekan sejawat.</li><li>Jangan menempatkan diri maupun pelanggan pada risiko tambahan.</li></ol>
+          <p><small>Dasar: Bagian 2 angka 2.4.6(2) huruf d-e, kolom Di Bus.</small></p>
+        </article>
+        <article data-topic="education" data-search="tap in tap out kartu uang elektronik qr tije apps pembayaran edukasi">
+          <span>Pramusapa yang mengedukasi</span><h2>Pelanggan membutuhkan bantuan pembayaran</h2>
+          <ol><li>Jelaskan penggunaan Kartu Uang Elektronik, QR code, atau Tije Apps saat tap in dan tap out.</li><li>Arahkan pelanggan melakukan prosesnya secara mandiri sejauh memungkinkan.</li><li>Jika terjadi kendala alat atau transaksi, lanjutkan ke panduan solusi pembayaran.</li></ol>
+          <p><small>Dasar: Bagian 2 angka 2.4.6(3) huruf a, kolom Di Bus; Bagian 3 angka 3.6.</small></p>
+        </article>
+        <article data-topic="education" data-search="trip planner google maps jadwal bus route info omnichannel">
+          <span>Pramusapa yang mengedukasi</span><h2>Pelanggan ingin merencanakan perjalanan</h2>
+          <ol><li>Ajarkan penggunaan trip planner di Tije Apps atau Google Maps.</li><li>Jelaskan cara membaca informasi jadwal dan rute bus yang tersedia.</li><li>Kenalkan kanal resmi Transjakarta agar pelanggan dapat mencari informasi secara mandiri.</li></ol>
+          <p><small>Dasar: Bagian 2 angka 2.4.6(3) huruf c-e, kolom Di Bus.</small></p>
+        </article>
+        <article data-topic="solution" data-search="kartu tidak terbaca double deduct gagal transaksi qr pembayaran tob">
+          <span>Pramusapa yang memberikan solusi</span><h2>Transaksi pembayaran bermasalah</h2>
+          <ol><li>Identifikasi jenis alat dan kendala transaksi yang dialami pelanggan.</li><li>Bantu sesuai prosedur pengelolaan kendala alat transaksi pembayaran.</li><li>Jika belum selesai, koordinasikan kepada Koordinator Lapangan Operasional Layanan untuk pelaporan kepada Divisi Digital dan IT.</li></ol>
+          <p><small>Dasar: Bagian 2 angka 2.4.6(4) huruf a, kolom Di Bus; Bagian 3 angka 3.6.</small></p>
+        </article>
+        <article data-topic="solution" data-search="ac mati bocor hujan bus kotor fasilitas kenyamanan">
+          <span>Gangguan fasilitas bus</span><h2>AC, kebersihan, atau fasilitas bus bermasalah</h2>
+          <ol><li>Identifikasi gangguan dan dampaknya kepada pelanggan.</li><li>Berikan solusi pelayanan yang dapat dilakukan tanpa melampaui kewenangan.</li><li>Catat dan laporkan gangguan bus melalui prosedur resmi.</li></ol>
+          <p><small>Dasar: Bagian 2 angka 2.1 huruf c-d dan 2.4.6(4) huruf c, kolom Di Bus.</small></p>
+        </article>
+        <article data-topic="solution" data-search="kehilangan barang tertinggal ditemukan mencurigakan lost found">
+          <span>Barang pelanggan</span><h2>Barang hilang, tertinggal, ditemukan, atau mencurigakan</h2>
+          <ol><li>Identifikasi situasi tanpa membuka atau memindahkan barang secara tidak perlu.</li><li>Ikuti prosedur penanganan barang tertinggal dan verifikasi pemilik.</li><li>Gunakan berita acara serah terima dan kanal pelaporan yang ditentukan.</li></ol>
+          <p><small>Dasar: Bagian 2 angka 2.4.6(4) huruf d, kolom Di Bus; Bagian 3 angka 3.5.</small></p>
+        </article>
+        <article data-topic="solution" data-search="kecelakaan jatuh sakit kesehatan darurat pelanggan">
+          <span>Kejadian khusus</span><h2>Pelanggan mengalami kecelakaan, jatuh, atau sakit</h2>
+          <ol><li>Utamakan keselamatan pelanggan dan amankan kondisi sekitar.</li><li>Koordinasikan dengan Pramudi serta kanal operasional resmi.</li><li>Hubungi bantuan darurat sesuai kebutuhan; dokumentasikan setelah kondisi tertangani.</li></ol>
+          <p><small>Dasar: Bagian 2 angka 2.1 huruf b dan 2.4.6(4) huruf e, kolom Di Bus; kontak darurat Bagian 4 angka 4.2.</small></p>
+        </article>
+        <article data-topic="priority" data-search="tuna netra buta tongkat bantuan bangku prioritas">
+          <span>Pelanggan prioritas · Tunanetra</span><h2>Pelanggan tunanetra membutuhkan bantuan</h2>
+          <ol><li>Perkenalkan diri sebagai petugas dan tawarkan bantuan.</li><li>Hindari kontak fisik atau memegang tongkat tanpa izin.</li><li>Antarkan ke bangku prioritas; setelah tiba, bantu turun dan pastikan pelanggan aman di perhentian.</li></ol>
+          <p><small>Dasar: Bagian 2 angka 2.4.7, kolom Di Bus.</small></p>
+        </article>
+        <article data-topic="priority" data-search="tunarungu tunawicara tuli bahasa isyarat gerak bibir tulisan">
+          <span>Pelanggan prioritas · Tunarungu/Tunawicara</span><h2>Pelanggan membutuhkan komunikasi visual</h2>
+          <ol><li>Berhadapan saat menyapa dan memperkenalkan diri.</li><li>Perhatikan isyarat; gunakan tulisan bila diperlukan dan jelaskan perlahan agar gerak bibir terlihat.</li><li>Saat tiba, bantu turun dan pastikan pelanggan aman di perhentian.</li></ol>
+          <p><small>Dasar: Bagian 2 angka 2.4.7, kolom Di Bus.</small></p>
+        </article>
+        <article data-topic="priority" data-search="tunadaksa kursi roda disabilitas bangku prioritas">
+          <span>Pelanggan prioritas · Tunadaksa</span><h2>Pelanggan menggunakan kursi roda</h2>
+          <ol><li>Jangan memegang atau mendorong kursi roda tanpa izin.</li><li>Antarkan pelanggan ke bangku prioritas di dalam bus.</li><li>Saat tiba, bantu turun dan pastikan pelanggan aman di perhentian.</li></ol>
+          <p><small>Dasar: Bagian 2 angka 2.4.7, kolom Di Bus.</small></p>
+        </article>
       </div>
-      <p class="empty-result" id="answer-empty" hidden>Belum ada panduan untuk pencarian ini. Gunakan kanal resmi untuk memastikan jawaban.</p>
+      <p class="empty-result" id="answer-empty" hidden>Situasi belum ditemukan. Gunakan kanal resmi dan konfirmasikan kepada Koordinator Lapangan Operasional Layanan.</p>
     </section>
 
     <section class="view" id="view-report" data-panel="report" hidden>
