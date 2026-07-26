@@ -36,6 +36,9 @@ $('#profile-form').addEventListener('submit',event=>{
   Object.assign(person,{name:$('#reliever-name').value.trim(),nik:$('#reliever-nik').value.trim(),vendor:$('#reliever-vendor').value,areas:$('#reliever-areas').value.trim(),updatedAt:new Date().toISOString()});
   save(RELIEVER_KEY,people);renderAvailability();renderOffers();alert('Profil reliever tersimpan.');
 });
+$('#new-profile').addEventListener('click',()=>{
+  activeId='';localStorage.removeItem(PROFILE_KEY);$('#profile-form').reset();renderAvailability();renderOffers();$('#reliever-name').focus();
+});
 $('#availability-form').addEventListener('submit',event=>{
   event.preventDefault();const people=load(RELIEVER_KEY);const person=people.find(item=>item.id===activeId);
   if(!person){alert('Simpan profil reliever terlebih dahulu.');return}
