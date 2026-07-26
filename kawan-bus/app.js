@@ -15,7 +15,7 @@ function loadState(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{
 function loadAssignments(){try{return JSON.parse(localStorage.getItem(ASSIGNMENT_KEY))||[]}catch{return[]}}
 function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));return true}catch{return false}}
 function saveAssignments(items){try{localStorage.setItem(ASSIGNMENT_KEY,JSON.stringify(items));return true}catch{return false}}
-function getAssignment(){return loadAssignments().filter(item=>item.status!=='cancelled').sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt))[0]||null}
+function getAssignment(){return loadAssignments().filter(item=>['assigned','confirmed'].includes(item.status)).sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt))[0]||null}
 function escapeHtml(value){const element=document.createElement('div');element.textContent=String(value);return element.innerHTML}
 function formatDate(value=new Date()){return new Intl.DateTimeFormat('id-ID',{day:'numeric',month:'long',year:'numeric'}).format(value)}
 function formatTime(value){return new Intl.DateTimeFormat('id-ID',{hour:'2-digit',minute:'2-digit'}).format(new Date(value)).replace('.',':')}
