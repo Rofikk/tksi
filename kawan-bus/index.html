@@ -33,12 +33,12 @@
 
     <section class="view active" id="view-duty" data-panel="duty">
       <div class="greeting">
-        <div><p class="eyebrow">Tugas Hari Ini</p><h1 id="greeting-title">Siap membantu pelayanan?</h1><p id="greeting-copy">Konfirmasikan penugasan satu kali. Setelah itu, konteks laporan akan terisi otomatis.</p></div>
-        <button class="outline-button" id="edit-duty" type="button">Atur penugasan</button>
+        <div><p class="eyebrow">Tugas Hari Ini</p><h1 id="greeting-title">Siap membantu pelayanan?</h1><p id="greeting-copy">Penugasan dibuat oleh Admin Vendor. Periksa dan konfirmasikan sebelum mulai pelayanan.</p></div>
+        <button class="outline-button" id="view-assignment" type="button">Lihat penugasan</button>
       </div>
 
       <article class="duty-card" id="duty-card" hidden>
-        <div class="duty-status"><span>Aktif</span><small id="duty-date">—</small></div>
+        <div class="duty-status"><span id="assignment-status">Menunggu konfirmasi</span><small id="duty-date">—</small></div>
         <h2 id="duty-route">—</h2>
         <div class="duty-meta">
           <div><small>Pramusapa</small><strong id="duty-officer">—</strong></div>
@@ -133,16 +133,21 @@
     <button type="button" data-view="history" aria-pressed="false"><span>≡</span>Riwayat</button>
   </nav>
 
-  <dialog id="duty-dialog">
-    <form method="dialog" id="duty-form">
-      <div class="dialog-heading"><div><p class="eyebrow">Satu kali per tugas</p><h2>Konfirmasi penugasan</h2></div><button value="cancel" aria-label="Tutup">×</button></div>
-      <div class="field"><label for="officer-name">Nama Pramusapa</label><input id="officer-name" autocomplete="name" required></div>
-      <div class="field"><label for="vendor">Vendor</label><select id="vendor" required><option value="">Pilih vendor</option><option>PT BDP</option><option>PT WMI</option><option>Lainnya</option></select></div>
-      <div class="field-row"><div class="field"><label for="route">Rute</label><input id="route" placeholder="Contoh: P11" required></div><div class="field"><label for="unit">Nomor unit</label><input id="unit" placeholder="Contoh: TJ-516" required></div></div>
-      <div class="field-row"><div class="field"><label for="shift">Shift</label><select id="shift" required><option>Pagi</option><option>Siang</option><option>Malam</option></select></div><div class="field"><label for="direction">Arah</label><input id="direction" placeholder="Contoh: Blok M → Bogor" required></div></div>
-      <button class="primary-button" value="default" type="submit">Aktifkan tugas</button>
-      <p>Data tersimpan hanya di perangkat ini.</p>
-    </form>
+  <dialog id="assignment-dialog">
+    <div class="assignment-dialog-content">
+      <div class="dialog-heading"><div><p class="eyebrow">Dibuat Admin Vendor</p><h2>Detail penugasan</h2></div><button id="close-assignment" type="button" aria-label="Tutup">×</button></div>
+      <div class="assignment-empty" id="assignment-empty"><p>Belum ada penugasan yang tersedia pada perangkat ini.</p><small>Admin Vendor perlu membuat penugasan melalui Konsol Admin Vendor.</small></div>
+      <dl class="assignment-detail" id="assignment-detail" hidden>
+        <div><dt>Pramusapa</dt><dd id="assignment-officer">—</dd></div>
+        <div><dt>Vendor</dt><dd id="assignment-vendor">—</dd></div>
+        <div><dt>Rute dan arah</dt><dd id="assignment-route">—</dd></div>
+        <div><dt>Unit</dt><dd id="assignment-unit">—</dd></div>
+        <div><dt>Shift</dt><dd id="assignment-shift">—</dd></div>
+        <div><dt>Tanggal tugas</dt><dd id="assignment-date">—</dd></div>
+      </dl>
+      <button class="primary-button" id="confirm-assignment" type="button" hidden>Konfirmasi penugasan</button>
+      <p class="assignment-note">Pramusapa hanya dapat melihat dan mengonfirmasi. Perubahan dilakukan oleh Admin Vendor.</p>
+    </div>
   </dialog>
 
   <dialog id="emergency-dialog">
