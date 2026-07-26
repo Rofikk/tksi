@@ -5,3 +5,6 @@
 
 /* Six-item production navigation */
 @media(max-width:1050px){.nav-toggle{display:block}.nav-links{display:none;position:absolute;top:66px;left:20px;right:20px;flex-direction:column;align-items:stretch;gap:0;padding:10px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}.nav-links.open{display:flex}.nav-links a{padding:10px}}
+
+/* Compact TKSI identity on small phones; full name remains in markup and metadata. */
+@media(max-width:560px){.site-header .brand small{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.site-header .brand{gap:8px}.site-header .brand-mark{width:36px;height:36px}}
