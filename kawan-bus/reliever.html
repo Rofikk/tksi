@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#09283f">
   <meta name="robots" content="noindex">
-  <title>Portal Reliever — Kawan Bus</title>
+  <title>Portal Buffer — Kawan Bus</title>
   <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,17 +16,17 @@
   </style>
 </head>
 <body>
-  <header class="app-header"><a class="brand" href="reliever.html"><span class="brand-mark">R</span><span>Portal Reliever<small>Kawan Bus · Prototipe</small></span></a><a class="outline-button" href="panduan.html">Panduan</a><a class="outline-button" href="admin.html">Admin Vendor</a><a class="outline-button" href="./">Pramusapa</a></header>
+  <header class="app-header"><a class="brand" href="reliever.html"><span class="brand-mark">R</span><span>Portal Buffer<small>Kawan Bus · Prototipe</small></span></a><a class="outline-button" href="panduan.html">Panduan</a><a class="outline-button" href="admin.html">Admin Vendor</a><a class="outline-button" href="pedoman-bus.html">Pedoman Bus</a><a class="outline-button" href="./">Pramusapa</a></header>
   <main class="reliever-main">
-    <div class="admin-heading"><div><p class="eyebrow">Daftar Siaga</p><h1>Kesempatan tugas tanpa war.</h1><p>Daftarkan waktu dan wilayah yang benar-benar dapat dijangkau. Penawaran diberikan bergilir berdasarkan pemerataan.</p></div></div>
+    <div class="admin-heading"><div><p class="eyebrow">Daftar Siaga</p><h1>Jadwal dan plotting Buffer tanpa war.</h1><p>Catat kesiapan dan wilayah yang dapat dijangkau. Admin Vendor tetap membuat jadwal dan plotting; urutan digunakan untuk pemerataan saat ada kebutuhan pengganti.</p></div></div>
     <div class="admin-limit"><strong>Batas prototipe:</strong> gunakan perangkat/browser yang sama dengan Admin Vendor. Versi ini belum menjadi sistem penugasan resmi.</div>
     <div class="reliever-grid">
       <div>
-        <form class="profile-card" id="profile-form"><h2>Profil reliever</h2><div class="field"><label for="reliever-name">Nama lengkap</label><input id="reliever-name" required></div><div class="field"><label for="reliever-nik">NIK/ID Vendor</label><input id="reliever-nik" required></div><div class="field"><label for="reliever-vendor">Vendor</label><select id="reliever-vendor" required><option value="">Pilih vendor</option><option>PT BDP</option><option>PT WMI</option><option>Lainnya</option></select></div><div class="field"><label for="reliever-areas">Wilayah/titik yang dapat dijangkau</label><input id="reliever-areas" placeholder="Contoh: Blok M, Ciputat atau Semua" required></div><button class="primary-button" type="submit">Simpan profil</button><button class="outline-button" id="new-profile" type="button">Daftarkan reliever lain</button></form>
-        <div class="fair-note">Menolak penawaran di luar kesiapan tidak mengurangi urutan. Setelah menerima penawaran, komitmen hadir akan dicatat.</div>
-        <form class="availability-card" id="availability-form"><h2>Tambahkan ketersediaan</h2><div class="field-row"><div class="field"><label for="available-date">Tanggal</label><input id="available-date" type="date" required></div><div class="field"><label for="available-shift">Shift</label><select id="available-shift" required><option>Pagi</option><option>Siang</option><option>Malam</option><option>Semua</option></select></div></div><button class="primary-button" type="submit">Tambahkan</button><div class="availability-list" id="availability-list"></div></form>
+        <form class="profile-card" id="profile-form"><h2>Profil Pramusapa Pengganti (Buffer)</h2><div class="field"><label for="reliever-name">Nama lengkap</label><input id="reliever-name" required></div><div class="field"><label for="reliever-nik">NIK/ID Vendor</label><input id="reliever-nik" required></div><div class="field"><label for="reliever-vendor">Vendor</label><select id="reliever-vendor" required><option value="">Pilih vendor</option><option>PT BDP</option><option>PT WMI</option><option>Lainnya</option></select></div><div class="field"><label for="reliever-areas">Wilayah/titik yang dapat dijangkau</label><input id="reliever-areas" placeholder="Contoh: Blok M, Ciputat atau Semua" required></div><button class="primary-button" type="submit">Simpan profil</button><button class="outline-button" id="new-profile" type="button">Daftarkan Buffer lain</button></form>
+        <div class="fair-note"><strong>Ketentuan Perdir:</strong> Pramusapa Pengganti (Buffer) Sub Bus dijadwalkan dan diplotting di titik halte ujung. Saat menggantikan petugas, pelaksanaan maksimal satu kali ritase. Data kesiapan di halaman ini bukan penetapan tugas.</div>
+        <form class="availability-card" id="availability-form"><h2>Catat kesiapan</h2><div class="field-row"><div class="field"><label for="available-date">Tanggal</label><input id="available-date" type="date" required></div><div class="field"><label for="available-shift">Shift</label><select id="available-shift" required><option>Pagi</option><option>Siang</option><option>Malam</option><option>Semua</option></select></div></div><button class="primary-button" type="submit">Tambahkan</button><div class="availability-list" id="availability-list"></div></form>
       </div>
-      <section><p class="eyebrow">Penawaran Tugas</p><h2>Konfirmasi hanya ketika siap hadir.</h2><div class="offer-list" id="offer-list"></div></section>
+      <section><p class="eyebrow">Penawaran Tugas</p><h2>Konfirmasi jadwal/penawaran hanya ketika siap hadir.</h2><div class="offer-list" id="offer-list"></div></section>
     </div>
   </main>
   <script src="reliever.js"></script>
