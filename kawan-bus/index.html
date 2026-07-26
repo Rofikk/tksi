@@ -21,7 +21,24 @@
       <span class="brand-mark">K</span>
       <span>Kawan Bus<small>Pilot pribadi · TKSI</small></span>
     </a>
-    <button class="install-button" id="install-app" type="button" hidden>Pasang aplikasi</button>
+    <nav class="app-global-nav" aria-label="Navigasi TKSI">
+      <a href="../index.html">Beranda</a>
+      <a href="../panduan.html">Mulai Belajar</a>
+      <a href="../domain.html">Pengetahuan</a>
+      <a class="active" aria-current="page" href="./">Kawan Bus</a>
+      <a href="../tentang.html">Tentang</a>
+    </nav>
+    <details class="app-mobile-menu">
+      <summary>Menu</summary>
+      <nav aria-label="Navigasi TKSI seluler">
+        <a href="../index.html">Beranda</a>
+        <a href="../panduan.html">Mulai Belajar</a>
+        <a href="../domain.html">Pengetahuan</a>
+        <a class="active" aria-current="page" href="./">Kawan Bus</a>
+        <a href="../tentang.html">Tentang</a>
+      </nav>
+    </details>
+    <button class="install-button" id="install-app" type="button" hidden>Pasang</button>
   </header>
 
   <main id="main">
@@ -202,7 +219,7 @@
 
   <footer>
     <p><strong>Kawan Bus Pilot</strong> · Sebuah eksperimen pembelajaran perjalanan oleh TKSI.</p>
-    <a href="../index.html">Kembali ke portal TKSI</a>
+    <nav aria-label="Navigasi footer Kawan Bus"><a href="../index.html">Beranda TKSI</a><a href="../domain.html">Pengetahuan</a><a href="../tentang.html">Tentang</a></nav>
   </footer>
   <script src="app.js"></script>
 </body>
