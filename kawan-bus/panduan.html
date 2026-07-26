@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#09283f">
+  <meta name="description" content="Panduan penggunaan Kawan Bus untuk Admin Vendor, Pramusapa PKWT, dan Pramusapa reliever.">
+  <title>Panduan Penggunaan — Kawan Bus</title>
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app.css">
+  <style>
+    .guide-main{width:min(100% - 30px,1000px);margin:auto;padding:36px 0 90px}.guide-hero{padding:30px;border-radius:22px;background:linear-gradient(135deg,var(--navy),#104d61);color:#fff}.guide-hero h1{margin:6px 0;font-size:clamp(32px,6vw,54px);line-height:1.06}.guide-hero p{max-width:700px;margin:8px 0 0;color:#c8d9df}.role-nav{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0 36px}.role-nav a{padding:17px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--navy);font-weight:800;text-decoration:none}.role-nav small{display:block;margin-top:4px;color:var(--muted);font-weight:500}.guide-section{scroll-margin-top:90px;margin-top:44px}.guide-section>h2{margin-bottom:6px;color:var(--navy);font-size:clamp(25px,4vw,36px)}.guide-section>p{color:var(--muted)}.step-list{display:grid;gap:10px;counter-reset:step}.step{display:grid;grid-template-columns:42px minmax(0,1fr);gap:14px;padding:18px;border:1px solid var(--line);border-radius:15px;background:#fff;counter-increment:step}.step:before{content:counter(step);display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--navy);color:#fff;font-family:'Manrope';font-weight:800}.step h3{margin:0 0 5px;color:var(--navy);font-size:16px}.step p{margin:0;color:var(--muted);font-size:13px}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:18px 0}.flow div{position:relative;padding:15px 10px;border-radius:12px;background:var(--soft);color:var(--navy);font-size:11px;font-weight:800;text-align:center}.flow div:not(:last-child):after{content:"→";position:absolute;right:-9px;top:50%;z-index:2;transform:translateY(-50%);color:var(--orange);font-size:18px}.rule-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.rule-card{padding:18px;border:1px solid var(--line);border-radius:15px;background:#fff}.rule-card h3{margin-bottom:7px;color:var(--navy);font-size:16px}.rule-card p,.rule-card li{color:var(--muted);font-size:12px}.rule-card ul{margin:0;padding-left:18px}.warning-box{margin-top:24px;padding:17px;border-left:4px solid var(--orange);background:#fff7ef;color:#6c6259;font-size:12px}.start-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.start-actions a{display:inline-flex;align-items:center;min-height:46px;padding:10px 16px;border-radius:10px;background:#fff;color:var(--navy);font-weight:800;text-decoration:none}.start-actions a:first-child{background:var(--orange);color:#fff}@media(max-width:720px){.role-nav,.rule-grid{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.flow div:not(:last-child):after{content:"↓";right:auto;top:auto;bottom:-15px;left:50%;transform:translateX(-50%)}.guide-hero{padding:23px}.app-header .outline-button{font-size:10px}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Lewati ke panduan</a>
+  <header class="app-header">
+    <a class="brand" href="./"><span class="brand-mark">K</span><span>Kawan Bus<small>Panduan Penggunaan</small></span></a>
+    <a class="outline-button" href="admin.html">Admin Vendor</a>
+    <a class="outline-button" href="reliever.html">Reliever</a>
+    <a class="outline-button" href="./">Pramusapa</a>
+  </header>
+  <main class="guide-main" id="main">
+    <section class="guide-hero">
+      <p class="eyebrow">Mulai dari sini</p>
+      <h1>Panduan penggunaan Kawan Bus</h1>
+      <p>Pilih panduan sesuai peran. Sistem membantu pembagian tugas dan pelayanan, tetapi belum menggantikan SOP, komunikasi resmi, atau keputusan operasional berwenang.</p>
+      <div class="start-actions"><a href="#admin">Saya Admin Vendor</a><a href="#pkwt">Saya Pramusapa PKWT</a><a href="#reliever">Saya Reliever</a></div>
+    </section>
+
+    <nav class="role-nav" aria-label="Pilih panduan berdasarkan peran">
+      <a href="#admin">Admin Vendor<small>Membuat jadwal dan menetapkan pengganti</small></a>
+      <a href="#pkwt">Pramusapa PKWT<small>Memeriksa dan mengonfirmasi jadwal</small></a>
+      <a href="#reliever">Pramusapa Reliever<small>Mengisi kesiapan dan menjawab penawaran</small></a>
+    </nav>
+
+    <section class="guide-section" id="alur">
+      <p class="eyebrow">Alur utama</p><h2>Dari jadwal hingga pelayanan</h2>
+      <div class="flow"><div>Admin membuat jadwal PKWT</div><div>PKWT mengonfirmasi</div><div>PKWT berhalangan</div><div>Sistem merekomendasikan reliever</div><div>Admin menetapkan pengganti</div></div>
+    </section>
+
+    <section class="guide-section" id="admin">
+      <p class="eyebrow">Peran 01</p><h2>Admin Vendor</h2><p>Admin adalah satu-satunya pihak yang membuat, menawarkan, menetapkan, dan membatalkan penugasan pada prototipe.</p>
+      <div class="step-list">
+        <article class="step"><div><h3>Buka Konsol Admin Vendor</h3><p>Pilih <b>Jadwal PKWT</b> untuk membuat jadwal reguler. Isi nama, NIK, vendor, tanggal, rute, unit, shift, dan arah.</p></div></article>
+        <article class="step"><div><h3>Catat PKWT yang berhalangan</h3><p>Buka <b>Cari Pengganti</b>. Isi petugas yang digantikan, alasan terverifikasi, tanggal, shift, rute, unit, wilayah, dan arah.</p></div></article>
+        <article class="step"><div><h3>Periksa urutan rekomendasi</h3><p>Sistem hanya menampilkan reliever yang tersedia pada tanggal dan shift tersebut serta sesuai wilayah. Kandidat dengan tugas paling sedikit berada di urutan awal.</p></div></article>
+        <article class="step"><div><h3>Tawarkan kepada kandidat prioritas</h3><p>Tekan <b>Tawarkan penugasan</b>. Reliever memperoleh waktu 10 menit untuk menerima atau menolak. Jangan melewati kandidat tanpa alasan yang dapat dipertanggungjawabkan.</p></div></article>
+        <article class="step"><div><h3>Pantau status</h3><p>Buka <b>Semua Penugasan</b>. Status dapat berupa menunggu, ditawarkan, dikonfirmasi, ditolak, kedaluwarsa, atau dibatalkan.</p></div></article>
+      </div>
+      <div class="start-actions"><a href="admin.html">Buka Konsol Admin Vendor</a></div>
+    </section>
+
+    <section class="guide-section" id="pkwt">
+      <p class="eyebrow">Peran 02</p><h2>Pramusapa PKWT</h2><p>PKWT memperoleh jadwal langsung dari Admin Vendor dan tidak mengatur jadwalnya sendiri.</p>
+      <div class="step-list">
+        <article class="step"><div><h3>Buka Tugas Hari Ini</h3><p>Tekan <b>Lihat penugasan</b>, kemudian cocokkan nama, vendor, tanggal, rute, unit, shift, dan arah.</p></div></article>
+        <article class="step"><div><h3>Konfirmasi jika sudah benar</h3><p>Jangan mengonfirmasi jika data penugasan berbeda. Hubungi Admin Vendor melalui kanal resmi untuk koreksi.</p></div></article>
+        <article class="step"><div><h3>Utamakan pelayanan</h3><p>Gunakan fitur Bantu Pelanggan dan Lapor Cepat hanya ketika kondisi memungkinkan. Keselamatan, keamanan, kenyamanan, dan informasi tetap menjadi tugas utama.</p></div></article>
+        <article class="step"><div><h3>Jika berhalangan hadir</h3><p>Sampaikan kepada atasan/Admin Vendor sesuai prosedur. PKWT tidak memilih sendiri reliever yang menggantikan.</p></div></article>
+      </div>
+      <div class="start-actions"><a href="./">Buka Aplikasi Pramusapa</a></div>
+    </section>
+
+    <section class="guide-section" id="reliever">
+      <p class="eyebrow">Peran 03</p><h2>Pramusapa Reliever</h2><p>Reliever tidak perlu berebut tugas. Kesempatan diberikan melalui antrean pemerataan berdasarkan kesiapan yang telah dicatat.</p>
+      <div class="step-list">
+        <article class="step"><div><h3>Simpan profil</h3><p>Isi nama, NIK/ID Vendor, vendor, serta wilayah atau titik yang benar-benar dapat dijangkau.</p></div></article>
+        <article class="step"><div><h3>Tambahkan ketersediaan</h3><p>Pilih tanggal dan shift. Hapus ketersediaan jika kondisi berubah sebelum memperoleh penawaran.</p></div></article>
+        <article class="step"><div><h3>Periksa penawaran</h3><p>Pastikan tanggal, shift, rute, unit, dan arah dapat dipenuhi. Terima hanya jika siap hadir.</p></div></article>
+        <article class="step"><div><h3>Jawab dalam 10 menit</h3><p>Pilih <b>Terima tugas</b> atau <b>Tidak tersedia</b>. Penawaran yang tidak dijawab akan kedaluwarsa.</p></div></article>
+        <article class="step"><div><h3>Konfirmasi saat mulai bertugas</h3><p>Setelah menerima penawaran, buka Aplikasi Pramusapa dan periksa kembali detail tugas sebelum pelayanan.</p></div></article>
+      </div>
+      <div class="start-actions"><a href="reliever.html">Buka Portal Reliever</a></div>
+    </section>
+
+    <section class="guide-section" id="aturan">
+      <p class="eyebrow">Aturan penggunaan</p><h2>Yang boleh dan tidak boleh dilakukan</h2>
+      <div class="rule-grid">
+        <article class="rule-card"><h3>Lakukan</h3><ul><li>Isi data sesuai kondisi sebenarnya.</li><li>Periksa penugasan sebelum konfirmasi.</li><li>Gunakan kanal resmi untuk keadaan darurat.</li><li>Jaga kerahasiaan data pelanggan.</li><li>Catat alasan perubahan penugasan.</li></ul></article>
+        <article class="rule-card"><h3>Hindari</h3><ul><li>Membuat penugasan tanpa kewenangan Admin Vendor.</li><li>Meminta reliever berebut melalui sistem war.</li><li>Mengonfirmasi tugas yang tidak dapat dijalankan.</li><li>Menggunakan aplikasi ketika mengganggu pengawasan pelanggan.</li><li>Menganggap catatan lokal sebagai laporan resmi.</li></ul></article>
+      </div>
+      <div class="warning-box"><strong>Penting:</strong> seluruh data prototipe masih tersimpan pada browser. Untuk demonstrasi, Admin Vendor, PKWT, dan reliever harus menggunakan browser/perangkat yang sama. Jangan memasukkan data pribadi sensitif atau menjadikannya dasar pembayaran sebelum tersedia login, basis data terpusat, dan audit resmi.</div>
+    </section>
+  </main>
+</body>
+</html>
